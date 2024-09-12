@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import styles from "./Button.module.scss";
 
 interface ButtonProps {
   label: string;
@@ -6,7 +7,11 @@ interface ButtonProps {
 }
 
 const FACButton: FC<ButtonProps> = ({ label, onClick }) => {
-  return <button onClick={onClick}>{label}</button>;
+  return (
+    <button className={styles.button} onClick={onClick}>
+      {label}
+    </button>
+  );
 };
 
 export default FACButton;
