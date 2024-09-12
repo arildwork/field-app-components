@@ -1,5 +1,11 @@
 {
   "name": "field-app-components",
+  "author": "Arild Sela",
+  "description": "Simple components for FieldApp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arildwork/field-app-components"
+  },
   "version": "0.0.5",
   "main": "dist/field-app-components.umd.js",
   "module": "dist/field-app-components.es.js",
