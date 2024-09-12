@@ -1,0 +1,142 @@
+.scrollable-calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 0 1rem;
+}
+
+.calendar-container {
+  flex: 0 0 100%;
+  background: var(--white);
+  border: 1px solid var(--neutral-light);
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+
+  &.simplified {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .scrollable-calendar-input {
+      height: 4.8rem;
+      padding: 1rem 1.2rem;
+    }
+  }
+}
+
+.error-input {
+  border-color: var(--warning);
+
+  [class~='p-inputtext'] {
+    color: var(--steel-blue);
+    background: none !important;
+  }
+}
+
+.calendar-title {
+  color: var(--neutral);
+  margin-bottom: 2rem;
+  line-height: 1;
+
+  &.title-valid {
+    color: var(--steel-blue);
+  }
+}
+
+.calendar-header {
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  label {
+    font-size: 1.2rem;
+    color: var(--aluminum-blue);
+  }
+}
+
+.calendar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 0;
+  cursor: pointer;
+
+  i {
+    font-size: 2rem;
+  }
+}
+
+.scroll-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+  border: 0;
+  background: var(--white);
+  cursor: pointer;
+  margin-left: 0.5rem;
+
+  i {
+    font-size: 1.8rem;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.row {
+  display: flex;
+  flex: 0 0 100%;
+
+  & > div {
+    margin-right: 0;
+  }
+}
+
+.week-day {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  .day {
+    text-align: center;
+
+    .date {
+      font-size: 1.4rem;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 30px;
+      margin: 0.5rem 0 0;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      color: var(--steel-blue);
+
+      &:hover,
+      &.today {
+        background: var(--pale-blue);
+      }
+      &.active {
+        background: var(--aluminum-blue);
+        color: var(--white);
+      }
+      &.date-disabled {
+        cursor: default;
+        opacity: 0.5;
+        text-decoration: line-through;
+      }
+    }
+    .name {
+      font-size: 1.2rem;
+      color: var(--neutral);
+    }
+  }
+}
