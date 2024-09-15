@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import styles from './Input.module.scss'
 
 interface InputProps {
   label: string;
@@ -7,7 +8,7 @@ interface InputProps {
 
 const FACInput: FC<InputProps> = ({ label, type }) => {
   return (
-    <div>
+    <div className={styles.background}>
       <label>{label}</label>
       <input type={type} />
     </div>
