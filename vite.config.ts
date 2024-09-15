@@ -31,6 +31,7 @@ export default defineConfig(({ mode }) => {
           },
         },
       },
+      cssCodeSplit: false,
     },
     server: {
       port: 5555,
