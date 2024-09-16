@@ -1,0 +1,43 @@
+.calendar {
+  .input {
+    border: none;
+    border-radius: 0.8rem;
+    color: var(--steel-blue);
+    font-family: var(--main-font), sans-serif;
+    font-size: 1.4rem;
+    width: 100%;
+
+    &::placeholder {
+      color: var(--grey-3);
+    }
+
+    &:focus {
+      border: none;
+    }
+  }
+
+  &:not([class~="p-calendar-disabled"])[class~="p-focus"] > .input {
+    box-shadow: none;
+  }
+
+  .dropdown-button {
+    background-color: var(--white);
+    border-bottom-right-radius: 0.8rem;
+    border-color: var(--white);
+    border-top-right-radius: 0.8rem;
+    color: var(--steel-blue);
+    font-size: 1.2rem;
+    width: 3.6rem;
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem var(--neutral-4);
+      border: none;
+    }
+  }
+}
+
+.day-label {
+  &[class~="p-disabled"] > div {
+    user-select: none !important;
+  }
+}

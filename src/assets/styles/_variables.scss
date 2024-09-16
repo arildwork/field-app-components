@@ -1,0 +1,71 @@
+:root {
+  // Font Family
+  --main-font: "Lato";
+
+  // Colors
+  --steel-blue: #223343;
+  --steel-light-blue: #384855;
+  --aluminum-blue: #4e7388;
+  --light-blue: #83afc8;
+  --pale-blue: #ebf3f8;
+  --white-blue: #f9fafb;
+  --white-blue-2: #f6f8fa;
+  --white: #ffffff;
+  --black: #000000;
+  --spacer-color: #dedede;
+  --danger-light: #d6616c;
+  --danger: #77193a;
+  --error-red: #ffafaf;
+  --neutral: #667085;
+  --neutral-2: #4a5672;
+  --neutral-3: #838ea6;
+  --neutral-4: #779db2;
+  --neutral-light: #bbc7da;
+  --warning: #f1b43c;
+  --warning-dark: #eba41a;
+  --grey-1: #edf2f8;
+  --grey-2: #d4d4d4;
+  --grey-3: #817f7f;
+  --red: #f98686;
+  --light-red: #feefe7;
+  --light-red-2: #feefe7;
+  --yellow: #ffefaf;
+  --light-yellow: #fdf6d8;
+  --light-yellow-2: #fffdf3;
+  --green: #81b29a;
+  --light-green: #edfbee;
+
+  // Radius
+  --border-5: 5px;
+  --border-8: 8px;
+  --border-10: 10px;
+  --border-15: 15px;
+  --border-50: 50px;
+
+  // Shadows
+  --shadow-1: 0px 0px 5px rgba(0, 0, 0, 0.25);
+  --shadow-2: 0px 4px 12px rgba(57, 91, 116, 0.14);
+  --shadow-3: 0px 1px 3px rgba(0, 77, 168, 0.15);
+  --shadow-datatable: -4px 1px 4px rgba(57, 91, 116, 0.14);
+  --shadow-datatable-2: 0px -2px 4px 0px rgba(57, 91, 116, 0.25);
+  --shadow-datatable-3: 0px 4px 12px 0px rgba(57, 91, 116, 0.14);
+
+  //prime react variables overwrite
+  --maskbg: rgba(34, 51, 67, 0.4);
+
+  //z-index
+  --z-index-0: 0;
+  --z-index-1: 1;
+  --z-index-2: 2;
+  --z-index-3: 3;
+  --z-index-4: 5;
+  --z-index-5: 6;
+  --z-index-10: 10;
+  --z-index-20: 20;
+  --z-index-30: 30;
+  --z-index-40: 40;
+  --z-index-50: 50;
+  --z-index-60: 60;
+  --z-index-100: 100;
+  --z-index-9999: 9999;
+}

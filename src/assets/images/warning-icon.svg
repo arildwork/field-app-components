@@ -1,0 +1,12 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+	 viewBox="0 0 16 14" style="enable-background:new 0 0 16 14;">
+<style type="text/css">
+	.st0{fill:none;stroke:#223343;stroke-width:1.3333;stroke-linecap:round;stroke-linejoin:round;}
+	.st1{fill:none;stroke:#F1B43C;stroke-width:1.3333;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+<line class="st0" x1="8" y1="5.3" x2="8" y2="8"/>
+<line class="st0" x1="8" y1="10.7" x2="8" y2="10.7"/>
+<path class="st1" d="M6.9,1.9l-5.6,9.4C1.1,11.5,1,11.8,1,12c0,0.2,0.1,0.5,0.2,0.7c0.1,0.2,0.3,0.4,0.5,0.5
+	c0.2,0.1,0.4,0.2,0.7,0.2h11.3c0.2,0,0.5-0.1,0.7-0.2c0.2-0.1,0.4-0.3,0.5-0.5S15,12.2,15,12c0-0.2-0.1-0.5-0.2-0.7L9.1,1.9
+	C9,1.7,8.9,1.5,8.7,1.4C8.5,1.3,8.2,1.3,8,1.3c-0.2,0-0.5,0.1-0.7,0.2C7.1,1.5,7,1.7,6.9,1.9z"/>
+</svg>

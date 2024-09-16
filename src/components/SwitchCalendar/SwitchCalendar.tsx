@@ -1,19 +1,6 @@
-// import moment from "config/moment/moment-config";
-import { useFormikContext } from "formik";
-import useAppTranslation from "hooks/useAppTranslation";
-import { useViewportChangeDetection } from "hooks/ViewportChangeDetection";
-// import { PRCalendar } from "next/components/PRComponents";
-// import PRTooltip from "next/components/PRComponents/PRTooltip/PRTooltip";
-// import {
-//   ValidationImage,
-//   ValidationText,
-// } from "next/components/ValidationErrors/ValidationErrors";
-import type {
-  CAPFormikData,
-  SAGFormikData,
-} from "next/pages/OrderingForms/common/dataTypes/formikDataTypes";
+import moment from "moment";
 import { PrimeIcons } from "primereact/api";
-import type {
+import {
   CalendarDateTemplateEvent,
   CalendarPropsSingle,
 } from "primereact/calendar";
@@ -23,10 +10,16 @@ import { classNames } from "primereact/utils";
 import type { FC, JSX, ReactNode } from "react";
 import { useLayoutEffect, useState } from "react";
 import { v4 } from "uuid";
-import styles from "./ScrollableCalendar.module.scss";
-import ScrollableCalendarDay from "./ScrollableCalendarDay";
+import styles from "./SwitchCalendar.module.scss";
+import SwitchCalendarDay from "./SwitchCalendarDay";
+import {
+  ValidationImage,
+  ValidationText,
+} from "@/components/_helpers/ValidationErrors/ValidationErrors";
+import Tooltip from "@/components/_helpers/Tooltip/Tooltip";
+import { Calendar } from "@/components/_helpers/Calendar/Calendar";
 
-export type ScrollableCalendarProps = {
+export type FCASwitchCalendarProps = {
   id: string;
   value: Nullable<Date>;
   labelText: string;
@@ -38,9 +31,22 @@ export type ScrollableCalendarProps = {
   error?: string;
   touched: boolean;
   dataTest?: string;
+  onDateClick: (date: Date) => void;
+  isMobileView: boolean;
+  language: string;
+  translationKeywords: CalendarTranslationKeywords;
 } & Omit<CalendarPropsSingle, "id">;
 
-const ScrollableCalendar: FC<ScrollableCalendarProps> = ({
+export type CalendarTranslationKeywords = {
+  actionsCalendarView: string;
+  actionsWeekView: string;
+  tooltipPreviousWeek: string;
+  tooltipNextWeek: string;
+  calendarPlaceholder: string;
+  errorFillOutField: string;
+};
+
+const FCASwitchCalendar: FC<FCASwitchCalendarProps> = ({
   id,
   value,
   labelText,
@@ -52,24 +58,21 @@ const ScrollableCalendar: FC<ScrollableCalendarProps> = ({
   touched,
   isLoading,
   dataTest,
+  onDateClick,
+  isMobileView,
+  language,
+  translationKeywords,
   ...rest
 }): JSX.Element => {
   const [startDate, setStartDate] = useState(minDate);
   const [defaultCalendar, setDefaultCalendar] = useState(true);
-  // const { language, tCommon } = useAppTranslation(['common']);
-  // const { setFieldValue } = useFormikContext<CAPFormikData | SAGFormikData>();
-  // const { isMobileView } = useViewportChangeDetection();
 
   const uniqueId = v4();
 
   const errorClassName = error && touched ? styles["error-input"] : undefined;
   const getLabelText = () => `${labelText} ${isMandatory ? "*" : ""}`;
-  // const computedDate = moment(value).locale(language);
-  // const todayDate = moment().locale(language);
-
-  const handleDateClick = (date: Date) => {
-    // setFieldValue(id, date);
-  };
+  const computedDate = moment(value).locale(language);
+  const todayDate = moment().locale(language);
 
   const handlePreviousClick = () => {
     const previousStartDate = moment(startDate).subtract(7, "days").toDate();
@@ -98,15 +101,16 @@ const ScrollableCalendar: FC<ScrollableCalendarProps> = ({
       const isDisabled = moment(currentDate).isAfter(maxDate, "day");
 
       weekDays.push(
-        <ScrollableCalendarDay
+        <SwitchCalendarDay
           key={i}
           currentDate={currentDate}
           isActive={isActive}
           isToday={isToday}
           isDisabled={isDisabled}
-          handleDateClick={handleDateClick}
+          handleDateClick={onDateClick}
           isLoading={isLoading}
-        />
+          language={language}
+        />,
       );
     }
 
@@ -132,8 +136,8 @@ const ScrollableCalendar: FC<ScrollableCalendarProps> = ({
               onClick={() => setDefaultCalendar((prev) => !prev)}
               data-pr-tooltip={
                 defaultCalendar
-                  ? tCommon("actions.calendarView")
-                  : tCommon("actions.weekView")
+                  ? translationKeywords.actionsCalendarView
+                  : translationKeywords.actionsWeekView
               }
             >
               {defaultCalendar ? (
@@ -142,8 +146,8 @@ const ScrollableCalendar: FC<ScrollableCalendarProps> = ({
                 <i className={PrimeIcons.CALENDAR_TIMES} />
               )}
             </button>
-            {!isMobileView() ? (
-              <PRTooltip
+            {!isMobileView ? (
+              <Tooltip
                 target={`#switch-calendar-view-${uniqueId}`}
                 position="bottom"
               />
@@ -158,12 +162,12 @@ const ScrollableCalendar: FC<ScrollableCalendarProps> = ({
                     isLoading
                   }
                   className={styles["scroll-btn"]}
-                  data-pr-tooltip={tCommon("calendar.timePeriods.previousWeek")}
+                  data-pr-tooltip={translationKeywords.tooltipPreviousWeek}
                 >
                   <i className={PrimeIcons.ANGLE_LEFT} />
                 </button>
-                {!isMobileView() ? (
-                  <PRTooltip
+                {!isMobileView ? (
+                  <Tooltip
                     target={`#previous-week-${uniqueId}`}
                     position="bottom"
                   />
@@ -173,12 +177,12 @@ const ScrollableCalendar: FC<ScrollableCalendarProps> = ({
                   onClick={handleNextClick}
                   disabled={isLoading}
                   className={styles["scroll-btn"]}
-                  data-pr-tooltip={tCommon("calendar.timePeriods.nextWeek")}
+                  data-pr-tooltip={translationKeywords.tooltipNextWeek}
                 >
                   <i className={PrimeIcons.ANGLE_RIGHT} />
                 </button>
-                {!isMobileView() ? (
-                  <PRTooltip
+                {!isMobileView ? (
+                  <Tooltip
                     target={`#next-week-${uniqueId}`}
                     position="bottom"
                   />
@@ -220,10 +224,10 @@ const ScrollableCalendar: FC<ScrollableCalendarProps> = ({
             className={classNames(
               styles["calendar-container"],
               styles.simplified,
-              errorClassName
+              errorClassName,
             )}
           >
-            <PRCalendar
+            <Calendar
               id={id}
               value={value}
               minDate={minDate}
@@ -231,7 +235,7 @@ const ScrollableCalendar: FC<ScrollableCalendarProps> = ({
               locale={language}
               dateFormat="dd.mm.yy"
               dateTemplate={dateTemplate}
-              placeholder={tCommon("calendar.chooseDay")}
+              placeholder={translationKeywords.calendarPlaceholder}
               disabled={isLoading}
               baseZIndex={30}
               className={styles["scrollable-calendar-input"]}
@@ -246,7 +250,7 @@ const ScrollableCalendar: FC<ScrollableCalendarProps> = ({
       </div>
       {error && touched ? (
         <ValidationText
-          text={tCommon("errorMessages.fillOutMandatoryField")}
+          text={translationKeywords.errorFillOutField}
           dataTest={`${dataTest}`}
         />
       ) : null}
@@ -254,4 +258,4 @@ const ScrollableCalendar: FC<ScrollableCalendarProps> = ({
   );
 };
 
-export default ScrollableCalendar;
+export default FCASwitchCalendar;

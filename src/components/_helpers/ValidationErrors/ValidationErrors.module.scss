@@ -1,0 +1,29 @@
+.validation-image {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  pointer-events: none;
+}
+
+.validation-image-icon {
+  position: absolute;
+  right: 50px;
+  top: 17px;
+  pointer-events: none;
+}
+
+.validation-image-double-icon {
+  right: 105px;
+}
+
+.validation-text {
+  flex: 0 0 100%;
+  width: 100%;
+  font-size: 1.2rem;
+  color: var(--warning-dark);
+  margin: 0.8rem 0 0;
+
+  p {
+    margin: 0;
+  }
+}
