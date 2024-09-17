@@ -1,0 +1,74 @@
+.dropdown {
+  border: 1px solid var(--neutral-light);
+  border-radius: 8px;
+  color: var(--steel-blue);
+  font-family: var(--main-font), sans-serif;
+  height: 4.8rem;
+  margin: 0;
+  width: 100%;
+
+  &[class~='disabled'] {
+    background-color: var(--surface-100);
+  }
+
+  &[class~='p-inputwrapper-focus'] {
+    box-shadow: none;
+  }
+
+  &:not([class~='p-disabled'])[class~='p-focus'] {
+    border: 1px solid var(--grey-4);
+  }
+
+  &:hover {
+    border: 1px solid var(--grey-4);
+  }
+
+  .input {
+    align-self: center;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1.4rem;
+    padding: 1rem 1.2rem;
+    width: 100%;
+
+    &.loading {
+      padding-right: 0;
+      width: 0;
+    }
+  }
+
+  .clear-icon {
+    position: relative;
+    right: 10px;
+    top: 18px;
+  }
+
+  .trigger {
+    width: 3.6rem;
+
+    &.loading {
+      justify-content: flex-start;
+      width: 100%;
+    }
+  }
+
+  [class*='p-dropdown-filter p-inputtext p-component'] {
+    height: auto;
+  }
+}
+
+.panel {
+  font-family: var(--main-font), sans-serif;
+  font-size: 1.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 25rem;
+
+  .item {
+    white-space: normal;
+
+    &[class*='p-highlight p-focus'] {
+      background-color: var(--highlight-bg);
+    }
+  }
+}

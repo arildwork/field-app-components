@@ -46,7 +46,7 @@ export type CalendarTranslationKeywords = {
   errorFillOutField: string;
 };
 
-const FCASwitchCalendar: FC<FCASwitchCalendarProps> = ({
+const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
   id,
   value,
   labelText,
@@ -110,7 +110,7 @@ const FCASwitchCalendar: FC<FCASwitchCalendarProps> = ({
           handleDateClick={onDateClick}
           isLoading={isLoading}
           language={language}
-        />,
+        />
       );
     }
 
@@ -224,7 +224,7 @@ const FCASwitchCalendar: FC<FCASwitchCalendarProps> = ({
             className={classNames(
               styles["calendar-container"],
               styles.simplified,
-              errorClassName,
+              errorClassName
             )}
           >
             <Calendar
@@ -258,4 +258,4 @@ const FCASwitchCalendar: FC<FCASwitchCalendarProps> = ({
   );
 };
 
-export default FCASwitchCalendar;
+export default FACSwitchCalendar;

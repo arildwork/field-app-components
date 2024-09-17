@@ -38,13 +38,23 @@ export default defineConfig(({ mode }) => {
         fileName: (format) => `field-app-components.${format}.js`,
       },
       rollupOptions: {
-        external: ["react", "react-dom"],
+        external: [
+          "react",
+          "react-dom",
+          "moment",
+          "primeicons",
+          "primereact",
+          "uuid",
+        ],
         output: {
           globals: {
             react: "React",
             "react-dom": "ReactDOM",
+            moment: "moment",
+            primeicons: "primeicons",
+            primereact: "primereact",
+            uuid: "uuid",
           },
-          assetFileNames: "src/assets/[name].[ext]",
         },
       },
       cssCodeSplit: false,

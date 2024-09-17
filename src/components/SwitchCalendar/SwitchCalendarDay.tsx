@@ -1,6 +1,4 @@
 import moment from "moment";
-// import { useSupplierRuleSystem } from 'hooks/SupplierRuleSystem/SupplierRuleSystem';
-// import useAppTranslation from 'hooks/useAppTranslation';
 import { Skeleton } from "primereact/skeleton";
 import { classNames } from "primereact/utils";
 import type { FC, JSX } from "react";
@@ -25,11 +23,6 @@ const SwitchCalendarDay: FC<ScrollableCalendarDayProps> = ({
   isLoading,
   language,
 }): JSX.Element => {
-  // const { language, tCommon } = useAppTranslation(['common']);
-  // const supplierRules = useSupplierRuleSystem();
-
-  // const message = tCommon('supplierRules.earliestPlacingTime');
-
   return (
     <div className={classNames(styles.day)}>
       {isLoading ? (
@@ -52,7 +45,7 @@ const SwitchCalendarDay: FC<ScrollableCalendarDayProps> = ({
               className={classNames(
                 styles.date,
                 isActive && styles.active,
-                isToday && styles.today,
+                isToday && styles.today
               )}
               onClick={() => handleDateClick(currentDate)}
             >
@@ -61,7 +54,7 @@ const SwitchCalendarDay: FC<ScrollableCalendarDayProps> = ({
           ) : (
             <div
               className={classNames(styles.date, styles["date-disabled"])}
-              // onClick={() => supplierRules.showModal(message)}
+              onClick={() => alert("disabled")}
             >
               {moment(currentDate).format("D")}
             </div>

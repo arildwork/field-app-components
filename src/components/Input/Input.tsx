@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import styles from './Input.module.scss'
+import styles from "./Input.module.scss";
 
-interface InputProps {
+export type InputProps = {
   label: string;
   type: "text" | "number" | "password";
-}
+};
 
 const FACInput: FC<InputProps> = ({ label, type }) => {
   return (
