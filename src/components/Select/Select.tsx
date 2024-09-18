@@ -1,5 +1,5 @@
-import { DropdownChangeEvent } from "primereact/dropdown";
-import { FC, ReactNode } from "react";
+import { DropdownChangeEvent, DropdownProps } from "primereact/dropdown";
+import { FC } from "react";
 import Dropdown from "@/components/_helpers/Dropdown/Dropdown";
 import "./Select.module.scss";
 
@@ -8,10 +8,8 @@ export type FCASelectProps = {
   options: OptionsModel[];
   optionLabel: "name" | "code";
   setValue: (e: DropdownChangeEvent) => void;
-  valueTemplate?: ReactNode;
-  itemTemplate?: ReactNode;
   filter?: boolean;
-};
+} & DropdownProps;
 
 export type OptionsModel = {
   name: string;
@@ -23,8 +21,8 @@ const FACSelect: FC<FCASelectProps> = ({
   options,
   optionLabel,
   setValue,
-  valueTemplate,
   filter,
+  ...rest
 }) => {
   return (
     <Dropdown
@@ -35,11 +33,8 @@ const FACSelect: FC<FCASelectProps> = ({
       placeholder="Select a Country"
       filter={filter}
       showClear={filter}
-      valueTemplate={(option: OptionsModel, props) =>
-        option ? option.name : props.placeholder
-      }
-      itemTemplate={(option: OptionsModel) => option.name}
       className="w-full md:w-14rem"
+      {...rest}
     />
   );
 };

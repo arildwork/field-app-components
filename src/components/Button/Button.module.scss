@@ -1,3 +1,44 @@
 .button {
-  background: lightseagreen;
+  background: var(--white);
+  border: 1px solid var(--steel-blue);
+  font: 600 14px var(--main-font);
+  color: var(--steel-blue);
+  border-radius: var(--border-8);
+  height: 36px;
+  padding: 0 24px;
+  transition: all 0.3s ease-in-out;
+
+  i {
+    font-size: 15px;
+    margin-right: 10px;
+  }
+
+  span,
+  i {
+    transition: all 0.3s ease-in-out;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:hover {
+    background: var(--steel-blue);
+
+    span,
+    i {
+      color: var(--white);
+    }
+  }
+
+  &-dark {
+    background: var(--steel-blue);
+    color: var(--white);
+
+    &:hover {
+      background: var(--aluminum-blue);
+      border-color: var(--aluminum-blue);
+    }
+  }
 }
