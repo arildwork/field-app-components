@@ -19,8 +19,8 @@ const AddDialog: FC<AddDialogProps> = ({ formOutput, formClose }) => {
     const codeInput = formElements.namedItem("code") as HTMLInputElement;
 
     const formData: OptionsModel = {
-      name: nameInput.value.replace(/ /g, ""),
-      code: codeInput.value.replace(/ /g, ""),
+      name: nameInput.value,
+      code: codeInput.value,
     };
 
     console.log(formData);
