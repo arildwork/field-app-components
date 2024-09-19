@@ -19,8 +19,8 @@ const AddDialog: FC<AddDialogProps> = ({ formOutput, formClose }) => {
     const codeInput = formElements.namedItem("code") as HTMLInputElement;
 
     const formData: OptionsModel = {
-      name: nameInput.value,
-      code: codeInput.value,
+      name: nameInput.value.replace(/ /g, ""),
+      code: codeInput.value.replace(/ /g, ""),
     };
 
     console.log(formData);
@@ -30,7 +30,7 @@ const AddDialog: FC<AddDialogProps> = ({ formOutput, formClose }) => {
   };
 
   return (
-    <form onSubmit={submitHandler} className={styles.form}>
+    <form onSubmit={submitHandler} method="post" className={styles.form}>
       <FACInputText
         style={{ marginBottom: "20px" }}
         type="text"
