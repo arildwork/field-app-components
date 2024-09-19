@@ -1,26 +1,26 @@
 .dropdown {
   border: 1px solid var(--neutral-light);
-  border-radius: 8px;
+  border-radius: var(--border-8);
   color: var(--steel-blue);
   font-family: var(--main-font), sans-serif;
-  height: 4.8rem;
+  height: 44px;
   margin: 0;
   width: 100%;
 
-  &[class~='disabled'] {
+  &[class~="disabled"] {
     background-color: var(--surface-100);
   }
 
-  &[class~='p-inputwrapper-focus'] {
+  &[class~="p-inputwrapper-focus"] {
     box-shadow: none;
   }
 
-  &:not([class~='p-disabled'])[class~='p-focus'] {
-    border: 1px solid var(--grey-4);
+  &:not([class~="p-disabled"])[class~="p-focus"] {
+    //border: 1px solid var(--grey-4);
   }
 
   &:hover {
-    border: 1px solid var(--grey-4);
+    border: 1px solid var(--steel-blue);
   }
 
   .input {
@@ -40,7 +40,7 @@
   .clear-icon {
     position: relative;
     right: 10px;
-    top: 18px;
+    top: 16px;
   }
 
   .trigger {
@@ -52,7 +52,7 @@
     }
   }
 
-  [class*='p-dropdown-filter p-inputtext p-component'] {
+  [class*="p-dropdown-filter p-inputtext p-component"] {
     height: auto;
   }
 }
@@ -64,10 +64,20 @@
   text-overflow: ellipsis;
   width: 25rem;
 
+  [class~="p-dropdown-filter-container"] {
+    position: relative;
+
+    svg {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  }
   .item {
+    padding: 5px 10px;
     white-space: normal;
 
-    &[class*='p-highlight p-focus'] {
+    &[class*="p-highlight p-focus"] {
       background-color: var(--highlight-bg);
     }
   }

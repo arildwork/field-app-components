@@ -1,0 +1,54 @@
+.select {
+}
+
+.select-with-add {
+  border: 1px solid var(--neutral-light);
+  border-radius: var(--border-8);
+  background: var(--white);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border: 1px solid var(--steel-blue);
+  }
+
+  [class~="p-dropdown"] {
+    border: 0;
+    width: calc(100% - 40px);
+  }
+
+  .add-button {
+    width: 40px;
+    height: 42px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+
+    i {
+      font-size: 12px;
+      color: var(--neutral);
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 20px;
+      background-color: var(--neutral-light);
+      left: 0;
+    }
+  }
+}
+
+.form {
+  .form-action {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+[class~="p-dialog-header"] {
+  [class~="p-dialog-title"] {
+    font-size: 16px;
+  }
+}

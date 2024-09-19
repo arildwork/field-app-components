@@ -7,6 +7,8 @@
   height: 36px;
   padding: 0 24px;
   transition: all 0.3s ease-in-out;
+  min-width: 120px;
+  appearance: none;
 
   i {
     font-size: 15px;
@@ -18,9 +20,11 @@
     transition: all 0.3s ease-in-out;
   }
 
-  &:focus {
+  &:focus,
+  &:focus-visible {
     outline: none;
     box-shadow: none;
+    border: 0;
   }
 
   &:hover {

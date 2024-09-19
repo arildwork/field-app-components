@@ -1,59 +1,53 @@
-import { PrimeIcons } from "primereact/api";
 import React, { ReactNode, useState } from "react";
+import { PrimeIcons } from "primereact/api";
+import { InputTextProps } from "primereact/inputtext";
+import { CalendarDateTemplateEvent } from "primereact/calendar";
 import FACSelect, { OptionsModel } from "@/components/Select/Select";
+import FACSelectWithAdd from "@/components/Select/SelectWithAdd";
 import FACSwitchCalendar, {
   CalendarTranslationKeywords,
-} from "../src/components/SwitchCalendar/SwitchCalendar";
-import FACButton from "../src/components/Button/ButtonLight";
-import FACInput from "../src/components/Input/InputNumber";
-import { CalendarDateTemplateEvent } from "primereact/calendar";
-import "./styles/main.scss";
+} from "@/components/SwitchCalendar/SwitchCalendar";
 import FACInputNumber from "@/components/Input/InputNumber";
-import { InputTextProps } from "primereact/inputtext";
-import FACButtonLight from "../src/components/Button/ButtonLight";
-import FACButtonDark from "../src/components/Button/ButtonDark";
-import FACModule from "../src/components/Module/Module";
+import FACButtonLight from "@/components/Button/ButtonLight";
+import FACButtonDark from "@/components/Button/ButtonDark";
+import FACModule from "@/components/Module/Module";
+import "./styles/main.scss";
 
-function App() {
+const calendarTranslationKeywords: CalendarTranslationKeywords = {
+  actionsCalendarView: "calendar view",
+  actionsWeekView: "week view",
+  tooltipPreviousWeek: "prev week",
+  tooltipNextWeek: " next week",
+  calendarPlaceholder: "placeholder",
+  errorFillOutField: "mandatory field",
+};
+
+const countries: OptionsModel[] = [
+  { name: "Australia", code: "AU" },
+  { name: "Brazil", code: "BR" },
+  { name: "China", code: "CN" },
+  { name: "Egypt", code: "EG" },
+  { name: "France", code: "FR" },
+  { name: "Germany", code: "DE" },
+  { name: "India", code: "IN" },
+  { name: "Japan", code: "JP" },
+  { name: "Spain", code: "ES" },
+  { name: "United States", code: "US" },
+];
+
+const App = () => {
   const [newDate, setNewDate] = useState<Date>();
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null,
+    null
   );
   const [numberValue, setNumberValue] = useState<string | null | undefined>(
-    "50",
+    "50"
   );
   const [isModuleShown, setIsModuleShown] = useState(false);
+  const [updatedCountries, setUpdatedCountries] =
+    useState<OptionsModel[]>(countries);
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
-
-  console.log("New date is: ", newDate);
-  console.log("New selected field is: ", selectedCountry);
-
-  const calendarTranslationKeywords: CalendarTranslationKeywords = {
-    actionsCalendarView: "calendar view",
-    actionsWeekView: "week view",
-    tooltipPreviousWeek: "prev week",
-    tooltipNextWeek: " next week",
-    calendarPlaceholder: "placeholder",
-    errorFillOutField: "mandatory field",
-  };
-
-  const countries: OptionsModel[] = [
-    { name: "Australia", code: "AU" },
-    { name: "Brazil", code: "BR" },
-    { name: "China", code: "CN" },
-    { name: "Egypt", code: "EG" },
-    { name: "France", code: "FR" },
-    { name: "Germany", code: "DE" },
-    { name: "India", code: "IN" },
-    { name: "Japan", code: "JP" },
-    { name: "Spain", code: "ES" },
-    { name: "United States", code: "US" },
-  ];
-
-  const itemTemplate = (option: OptionsModel) => {
-    return <div>{option.name} - Edited item</div>;
-  };
 
   return (
     <div className="container">
@@ -95,8 +89,24 @@ function App() {
         options={countries}
         optionLabel="name"
         setValue={(e) => setSelectedCountry(e.value)}
-        itemTemplate={itemTemplate}
-        valueTemplate={itemTemplate}
+        itemTemplate={(option: OptionsModel) => (
+          <div>{option?.name} - Edited item</div>
+        )}
+        valueTemplate={(option: OptionsModel, props) =>
+          option ? <div>{option?.name} - Edited item</div> : props.placeholder
+        }
+      />
+      <div className="mb-2"></div>
+      <FACSelectWithAdd
+        value={selectedCountry}
+        options={updatedCountries}
+        updatedOptions={(country: OptionsModel) =>
+          setUpdatedCountries([country, ...updatedCountries])
+        }
+        optionLabel="name"
+        setValue={(e) => setSelectedCountry(e.value)}
+        modalHeader={"Header 1"}
+        filter
       />
       <div className="mb-2"></div>
       <FACInputNumber
@@ -141,12 +151,12 @@ function App() {
         buttonText="Click to open module"
       />
       <FACModule
-        moduleIsVisible={isModuleShown}
-        moduleHide={() => setIsModuleShown(false)}
+        visible={isModuleShown}
+        onHide={() => setIsModuleShown(false)}
         moduleContent={<div>content</div>}
       />
     </div>
   );
-}
+};
 
 export default App;
