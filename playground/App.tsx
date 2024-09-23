@@ -12,6 +12,10 @@ import FACButtonLight from "@/components/Button/ButtonLight";
 import FACButtonDark from "@/components/Button/ButtonDark";
 import FACModule from "@/components/Module/Module";
 import "./styles/main.scss";
+import FACInputText from "@/components/Input/InputText";
+import FACInputUpload from "@/components/Input/InputUpload";
+import { InputNumberProps } from "primereact/inputnumber";
+import FACInputSwitch from "@/components/Input/InputSwitch";
 
 const calendarTranslationKeywords: CalendarTranslationKeywords = {
   actionsCalendarView: "calendar view",
@@ -35,45 +39,57 @@ const countries: OptionsModel[] = [
   { name: "United States", code: "US" },
 ];
 
+const inputSwitchOptions: OptionsModel[] = [
+  { name: "Delivery", code: "delivery" },
+  { name: "Takeaway", code: "takeaway" },
+];
+
 const App = () => {
   const [newDate, setNewDate] = useState<Date>();
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null
+    null,
   );
-  const [numberValue, setNumberValue] = useState<string | null | undefined>(
-    "50"
-  );
+  const [numberValue, setNumberValue] = useState<number | null | undefined>(50);
+  const [textValue, setTextValue] = useState<string | null | undefined>("test");
   const [isModuleShown, setIsModuleShown] = useState(false);
   const [updatedCountries, setUpdatedCountries] =
     useState<OptionsModel[]>(countries);
+  const [fileUploaded, setFileUploaded] = useState<File | null>(null);
+  const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
+    inputSwitchOptions[0],
+  );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
 
+  console.log(inputSwitch);
+
   return (
-    <div className="container">
-      <div className="mb-2"></div>
+    <div className="container pt-2 pb-2">
       <h1 style={{ margin: "0 0 3rem" }}>Field App Components Playground</h1>
       {/*<FACButton label="Click Me" onClick={() => alert("Button Clicked!")} />*/}
       {/*<FACInput label="test input" type="password" />*/}
       <FACSwitchCalendar
-        id={"inputFieldTypeProperty"}
         labelText={"Delivery Date"}
         value={newDate}
         isMandatory
-        icon={() => <i className={PrimeIcons.CALENDAR} />}
-        minDate={new Date()}
-        maxDate={new Date(new Date().setDate(new Date().getDate() + 7))}
-        touchUI={false}
+        minDate={new Date(new Date().setDate(new Date().getDate() - 360))}
+        maxDate={new Date()}
+        // minDate={new Date()}
+        // maxDate={new Date(new Date().setDate(new Date().getDate() + 20))}
         onDateClick={(date) => setNewDate(date)}
-        showIcon
         dateTemplate={dateTemplate}
         error={""}
-        touched={false}
-        isLoading={false}
-        dataTest={"delivery-date-calendar"}
-        isMobileView={false}
         language="en"
         translationKeywords={calendarTranslationKeywords}
+        direction="backward"
+      />
+      <div className="mb-2"></div>
+      <FACSelect
+        value={selectedCountry}
+        options={countries}
+        optionLabel="name"
+        setValue={(e) => setSelectedCountry(e.value)}
+        icon={<i className={PrimeIcons.CLOCK}></i>}
       />
       <div className="mb-2"></div>
       <FACSelect
@@ -113,15 +129,40 @@ const App = () => {
         inputLabel="test Label"
         inputPlaceholder="Test placeholder"
         inputValue={numberValue}
-        inputAction={(e: InputTextProps) => setNumberValue(e.value)}
+        inputAction={(e: InputNumberProps) => setNumberValue(e.value)}
+        useGrouping={false}
+        showButtons
       />
       <div className="mb-2"></div>
       <FACInputNumber
         inputLabel="test Label"
         inputPlaceholder="Test placeholder"
         inputValue={numberValue}
-        inputAction={(e: InputTextProps) => setNumberValue(e.value)}
+        inputAction={(e: InputNumberProps) => setNumberValue(e.value)}
         inputIcon={<i className={PrimeIcons.PENCIL}></i>}
+      />
+      <div className="mb-2"></div>
+      <FACInputText
+        inputLabel="test Label"
+        inputPlaceholder="Test placeholder"
+        inputValue={textValue}
+        inputAction={(e: InputTextProps) => setTextValue(e.value)}
+      />
+      <div className="mb-2"></div>
+      <FACInputText
+        inputLabel="test Label"
+        inputPlaceholder="Test placeholder"
+        inputValue={textValue}
+        inputAction={(e: InputTextProps) => setTextValue(e.value)}
+        inputIcon={<i className={PrimeIcons.PENCIL}></i>}
+      />
+      <div className="mb-2"></div>
+      <FACInputUpload onFileSelect={setFileUploaded} inputLabel="Upload" />
+      <div className="mb-2"></div>
+      <FACInputSwitch
+        inputOptions={inputSwitchOptions}
+        inputAction={(e) => setInputSwitch(e.value)}
+        inputValue={inputSwitch}
       />
       <div className="mb-2"></div>
       <FACButtonLight
@@ -155,6 +196,7 @@ const App = () => {
         onHide={() => setIsModuleShown(false)}
         moduleContent={<div>content</div>}
       />
+      <div className="mt-2"></div>
     </div>
   );
 };

@@ -48,6 +48,7 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+  width: 100%;
 }
 
 // General
@@ -67,7 +68,12 @@ body {
   background: var(--white-blue-2);
   overflow-x: hidden;
   word-break: break-word;
-  min-height: 100vh;
+  height: 100%;
+  display: flex;
+
+  &:has([class~="p-tooltip"]) {
+    overflow: auto;
+  }
 }
 
 a {
@@ -193,6 +199,9 @@ h6 {
 }
 .pt-2 {
   padding-top: 2rem !important;
+}
+.pb-2 {
+  padding-bottom: 2rem !important;
 }
 .hidden {
   display: none !important;

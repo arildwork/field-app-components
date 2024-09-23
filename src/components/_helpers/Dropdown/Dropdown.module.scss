@@ -15,10 +15,6 @@
     box-shadow: none;
   }
 
-  &:not([class~="p-disabled"])[class~="p-focus"] {
-    //border: 1px solid var(--grey-4);
-  }
-
   &:hover {
     border: 1px solid var(--steel-blue);
   }
@@ -73,7 +69,8 @@
       right: 10px;
     }
   }
-  .item {
+  .item,
+  [class="p-dropdown-empty-message"] {
     padding: 5px 10px;
     white-space: normal;
 

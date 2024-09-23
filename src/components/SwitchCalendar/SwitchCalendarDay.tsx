@@ -10,7 +10,7 @@ export type ScrollableCalendarDayProps = {
   isToday: boolean;
   isDisabled: boolean;
   handleDateClick: (date: Date) => void;
-  isLoading: boolean;
+  handleDisableDateClick: () => void;
   language: string;
 };
 
@@ -20,46 +20,32 @@ const SwitchCalendarDay: FC<ScrollableCalendarDayProps> = ({
   isToday,
   isDisabled,
   handleDateClick,
-  isLoading,
+  handleDisableDateClick,
   language,
 }): JSX.Element => {
   return (
     <div className={classNames(styles.day)}>
-      {isLoading ? (
-        <Skeleton height="14.4px" />
-      ) : (
-        <div className={styles.name}>
-          {moment(currentDate).locale(language).format("ddd")}
-        </div>
-      )}
-      {isLoading ? (
-        <Skeleton
-          className={classNames(styles.date, styles["date-disabled"])}
-          height="30px"
-          width="30px"
-        />
-      ) : (
-        <>
-          {!isDisabled ? (
-            <div
-              className={classNames(
-                styles.date,
-                isActive && styles.active,
-                isToday && styles.today
-              )}
-              onClick={() => handleDateClick(currentDate)}
-            >
-              {moment(currentDate).format("D")}
-            </div>
-          ) : (
-            <div
-              className={classNames(styles.date, styles["date-disabled"])}
-              onClick={() => alert("disabled")}
-            >
-              {moment(currentDate).format("D")}
-            </div>
+      <div className={styles.name}>
+        {moment(currentDate).locale(language).format("ddd")}
+      </div>
+      {!isDisabled ? (
+        <div
+          className={classNames(
+            styles.date,
+            isActive && styles.active,
+            isToday && styles.today,
           )}
-        </>
+          onClick={() => handleDateClick(currentDate)}
+        >
+          {moment(currentDate).format("D")}
+        </div>
+      ) : (
+        <div
+          className={classNames(styles.date, styles["date-disabled"])}
+          onClick={handleDisableDateClick}
+        >
+          {moment(currentDate).format("D")}
+        </div>
       )}
     </div>
   );

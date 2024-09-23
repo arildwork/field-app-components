@@ -1,19 +1,19 @@
 import React, { FC, ReactNode } from "react";
-import { InputText, InputTextProps } from "primereact/inputtext";
 import { v4 } from "uuid";
 import { classNames } from "primereact/utils";
 import styles from "./Input.module.scss";
+import { InputNumber, InputNumberProps } from "primereact/inputnumber";
 
-export type FACInputProps = {
+export type FACInputNumberProps = {
   inputLabel?: string;
   inputPlaceholder?: string;
-  inputValue?: string | null | undefined;
-  inputAction?: (e: InputTextProps) => void;
+  inputValue?: number | null | undefined;
+  inputAction?: (e: InputNumberProps) => void;
   inputIcon?: ReactNode;
   inputClassname?: string;
-} & InputTextProps;
+} & InputNumberProps;
 
-const FACInputNumber: FC<FACInputProps> = ({
+const FACInputNumber: FC<FACInputNumberProps> = ({
   inputLabel,
   inputPlaceholder,
   inputValue,
@@ -31,13 +31,12 @@ const FACInputNumber: FC<FACInputProps> = ({
       })}
     >
       {inputLabel && <label htmlFor={uniqueID}>{inputLabel}</label>}
-      <InputText
+      <InputNumber
         className={classNames(inputClassname)}
         id={uniqueID}
         placeholder={inputPlaceholder}
         value={inputValue}
         onChange={inputAction}
-        keyfilter="int"
         {...rest}
       />
       {inputIcon && <div className={styles.icon}>{inputIcon}</div>}

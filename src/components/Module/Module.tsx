@@ -5,7 +5,7 @@ import styles from "./Module.module.scss";
 export type FACModuleProps = {
   visible: boolean;
   onHide: () => void;
-  moduleContent: ReactNode;
+  moduleContent?: ReactNode;
 } & DialogProps;
 
 const FACModule: FC<FACModuleProps> = ({
@@ -16,6 +16,7 @@ const FACModule: FC<FACModuleProps> = ({
 }) => {
   return (
     <Dialog
+      className={styles.module}
       blockScroll
       closable
       draggable={false}

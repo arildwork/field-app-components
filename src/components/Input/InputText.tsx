@@ -1,11 +1,19 @@
-import { FACInputProps } from "./InputNumber";
-import React, { FC } from "react";
-import { InputText } from "primereact/inputtext";
+import React, { FC, ReactNode } from "react";
+import { InputText, InputTextProps } from "primereact/inputtext";
 import { v4 } from "uuid";
 import { classNames } from "primereact/utils";
 import styles from "./Input.module.scss";
 
-const FACInputText: FC<FACInputProps> = ({
+export type FACInputTextProps = {
+  inputLabel?: string;
+  inputPlaceholder?: string;
+  inputValue?: string | null | undefined;
+  inputAction?: (e: InputTextProps) => void;
+  inputIcon?: ReactNode;
+  inputClassname?: string;
+} & InputTextProps;
+
+const FACInputText: FC<FACInputTextProps> = ({
   inputLabel,
   inputPlaceholder,
   inputValue,

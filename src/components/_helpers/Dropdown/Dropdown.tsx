@@ -25,16 +25,9 @@ const Dropdown: FC<DropdownProps> = ({
     <PRDropdown
       appendTo="self"
       style={{ maxWidth: "100%" }}
-      emptyMessage={
-        optionsLoading ? (
-          <div>loading</div>
-        ) : (
-          "newTranslation.common.filters.search.noResults"
-        )
-      }
-      filterPlaceholder={"newTranslation.common.filters.search.placeholder"}
-      emptyFilterMessage={"newTranslation.common.filters.search.noResults"}
-      data-test={`${dataTest}-dropdown`}
+      emptyMessage={optionsLoading ? <div>loading</div> : "noResults"}
+      filterPlaceholder={"Placeholder"}
+      emptyFilterMessage={"noResults"}
       valueTemplate={props.valueTemplate}
       loading={valueLoading}
       loadingIcon={<Skeleton height="10px" width="100px" />}
@@ -58,7 +51,7 @@ const Dropdown: FC<DropdownProps> = ({
           className: classNames(
             styles.panel,
             `t-${dataTest}-dropdown-panel`,
-            panelClassName
+            panelClassName,
           ),
         },
 

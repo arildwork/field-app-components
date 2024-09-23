@@ -5,23 +5,17 @@ import styles from "./ValidationErrors.module.scss";
 
 type ValidationTextProps = {
   text: string;
-  dataTest?: string;
 };
 
 type ValidationImageProps = {
   fieldWithIcon?: boolean;
   fieldWithDoubleIcon?: boolean;
-  dataTest?: string;
 };
 
 export const ValidationText: FC<ValidationTextProps> = ({
   text,
-  dataTest,
 }): JSX.Element => (
-  <div
-    data-test={`${dataTest}-validation-text`}
-    className={styles["validation-text"]}
-  >
+  <div className={styles["validation-text"]}>
     <p>{text}</p>
   </div>
 );
@@ -29,10 +23,8 @@ export const ValidationText: FC<ValidationTextProps> = ({
 export const ValidationImage: FC<ValidationImageProps> = ({
   fieldWithIcon,
   fieldWithDoubleIcon,
-  dataTest,
 }): JSX.Element => (
   <div
-    data-test={`${dataTest}-validation-image`}
     className={classNames(styles["validation-image"], {
       [styles["validation-image-icon"]]: fieldWithIcon,
       [styles["validation-image-double-icon"]]: fieldWithDoubleIcon,
