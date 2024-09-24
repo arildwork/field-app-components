@@ -16,6 +16,9 @@ import FACInputText from "@/components/Input/InputText";
 import FACInputUpload from "@/components/Input/InputUpload";
 import { InputNumberProps } from "primereact/inputnumber";
 import FACInputSwitch from "@/components/Input/InputSwitch";
+import { ColumnModel } from "@/components/Datatable/Datatable";
+import { MaterialDatatableModel } from "@/components/Datatable/MaterialDatatable";
+import FACDatatable from "@/components/Datatable/Datatable";
 
 const calendarTranslationKeywords: CalendarTranslationKeywords = {
   actionsCalendarView: "calendar view",
@@ -44,10 +47,28 @@ const inputSwitchOptions: OptionsModel[] = [
   { name: "Takeaway", code: "takeaway" },
 ];
 
+const dataTableItems: MaterialDatatableModel[] = [
+  {
+    id: "1000",
+    materialCategory: "Concrete",
+    materialIDSupplier: "A555",
+    materialNameSupplier: "C12/15",
+    deliveredQuantity: 10,
+  },
+];
+
+const columns: ColumnModel[] = [
+  { field: "materialCategory", header: "Material Category" },
+  { field: "materialIDSupplier", header: "Material ID Supplier" },
+  { field: "materialNameSupplier", header: "Material Name Supplier" },
+  { field: "deliveredQuantity", header: "Delivered Quantity" },
+  // { field: "unitOfMeasure", header: "UoM" },
+];
+
 const App = () => {
   const [newDate, setNewDate] = useState<Date>();
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null,
+    null
   );
   const [numberValue, setNumberValue] = useState<number | null | undefined>(50);
   const [textValue, setTextValue] = useState<string | null | undefined>("test");
@@ -56,7 +77,7 @@ const App = () => {
     useState<OptionsModel[]>(countries);
   const [fileUploaded, setFileUploaded] = useState<File | null>(null);
   const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
-    inputSwitchOptions[0],
+    inputSwitchOptions[0]
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
@@ -163,6 +184,12 @@ const App = () => {
         inputOptions={inputSwitchOptions}
         inputAction={(e) => setInputSwitch(e.value)}
         inputValue={inputSwitch}
+      />
+      <div className="mb-2"></div>
+      <FACDatatable<MaterialDatatableModel>
+        datatableOptions={dataTableItems}
+        datatableColumns={columns}
+        frozenHeader={true}
       />
       <div className="mb-2"></div>
       <FACButtonLight

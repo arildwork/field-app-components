@@ -23,8 +23,6 @@ const AddDialog: FC<AddDialogProps> = ({ formOutput, formClose }) => {
       code: codeInput.value,
     };
 
-    console.log(formData);
-
     formOutput(formData);
     formClose();
   };
