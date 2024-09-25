@@ -19,6 +19,7 @@ import FACInputSwitch from "@/components/Input/InputSwitch";
 import { ColumnModel } from "@/components/Datatable/Datatable";
 import { MaterialDatatableModel } from "@/components/Datatable/MaterialDatatable";
 import FACDatatable from "@/components/Datatable/Datatable";
+import FACAccordion from "@/components/Accordion/Accordion";
 
 const calendarTranslationKeywords: CalendarTranslationKeywords = {
   actionsCalendarView: "calendar view",
@@ -68,7 +69,7 @@ const columns: ColumnModel[] = [
 const App = () => {
   const [newDate, setNewDate] = useState<Date>();
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null
+    null,
   );
   const [numberValue, setNumberValue] = useState<number | null | undefined>(50);
   const [textValue, setTextValue] = useState<string | null | undefined>("test");
@@ -77,7 +78,7 @@ const App = () => {
     useState<OptionsModel[]>(countries);
   const [fileUploaded, setFileUploaded] = useState<File | null>(null);
   const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
-    inputSwitchOptions[0]
+    inputSwitchOptions[0],
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
@@ -223,6 +224,30 @@ const App = () => {
         onHide={() => setIsModuleShown(false)}
         moduleContent={<div>content</div>}
       />
+      <div className="mt-2"></div>
+      <FACAccordion header="Header 1">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </FACAccordion>
+      <div className="mt-2"></div>
+      <FACAccordion header="Header 2">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </FACAccordion>
       <div className="mt-2"></div>
     </div>
   );

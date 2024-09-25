@@ -21,3 +21,4 @@ export { default as FACDatatable } from "./components/Datatable/Datatable";
 // Layout
 export { default as FACCard } from "./components/Card/Card";
 export { default as FACModule } from "./components/Module/Module";
+export { default as FACAccordion } from "./components/Accordion/Accordion";

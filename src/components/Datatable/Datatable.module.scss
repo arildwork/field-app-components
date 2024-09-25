@@ -1,5 +1,5 @@
 .datatable {
-  box-shadow: 0 4px 12px 0 rgba(57, 91, 116, 0.14);
+  box-shadow: var(--shadow-datatable-3);
 
   [class~="p-datatable"] {
     font: 400 14px var(--main-font);
