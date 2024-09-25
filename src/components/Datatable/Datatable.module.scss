@@ -1,0 +1,23 @@
+.datatable {
+  box-shadow: var(--shadow-datatable-3);
+
+  [class~="p-datatable"] {
+    font: 400 14px var(--main-font);
+
+    [class~="p-datatable-thead"] {
+      th {
+        font-size: 12px;
+        color: var(--neutral);
+        border: 0;
+        border-bottom: 1px solid var(--neutral-light);
+        background: var(--white-blue-2);
+      }
+    }
+
+    [class~="p-datatable-tbody"] {
+      td {
+        height: 50px;
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+import warningIcon from "@/assets/images/warning-icon.svg";
+import { classNames } from "primereact/utils";
+import type { FC, JSX } from "react";
+import styles from "./ValidationErrors.module.scss";
+
+type ValidationTextProps = {
+  text: string;
+};
+
+type ValidationImageProps = {
+  fieldWithIcon?: boolean;
+  fieldWithDoubleIcon?: boolean;
+};
+
+export const ValidationText: FC<ValidationTextProps> = ({
+  text,
+}): JSX.Element => (
+  <div className={styles["validation-text"]}>
+    <p>{text}</p>
+  </div>
+);
+
+export const ValidationImage: FC<ValidationImageProps> = ({
+  fieldWithIcon,
+  fieldWithDoubleIcon,
+}): JSX.Element => (
+  <div
+    className={classNames(styles["validation-image"], {
+      [styles["validation-image-icon"]]: fieldWithIcon,
+      [styles["validation-image-double-icon"]]: fieldWithDoubleIcon,
+    })}
+  >
+    <img src={warningIcon} alt="" />
+  </div>
+);
