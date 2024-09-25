@@ -16,6 +16,12 @@ You can easily install the package via npm:
 npm install field-app-components
 ```
 
+or if that fails, try installing without dependencies
+
+```shell
+npm install field-app-components --legacy-peer-deps
+```
+
 ## Using the Components
 To use the components, simply import them into your project and start building:
 

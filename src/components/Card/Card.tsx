@@ -1,8 +1,14 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, ReactNode } from "react";
 import styles from "./Card.module.scss";
+import { classNames } from "primereact/utils";
 
-const FACCard: FC<PropsWithChildren> = ({ children }) => {
-  return <div className={styles.card}>{children}</div>;
+export type FACCardProps = {
+  children: ReactNode;
+  className?: string;
+};
+
+const FACCard: FC<FACCardProps> = ({ children, className }) => {
+  return <div className={classNames(styles.card, className)}>{children}</div>;
 };
 
 export default FACCard;
