@@ -1,37 +1,33 @@
 import React, { FC, ReactNode } from "react";
 import styles from "./Button.module.scss";
-import { Button } from "primereact/button";
+import { Button, ButtonProps } from "primereact/button";
 import { classNames } from "primereact/utils";
 
-export type FACButtonProps = {
-  buttonText: string;
-  buttonAction: () => void;
-  buttonIcon?: ReactNode;
-  buttonType?: "button" | "submit" | "reset";
+export type FACButtonLightProps = {
+  buttonLabel: string;
   buttonClassname?: string;
-};
+} & ButtonProps;
 
-const FACButtonLight: FC<FACButtonProps> = ({
-  buttonText,
-  buttonAction,
-  buttonIcon,
-  buttonType = "button",
+const FACButtonLight: FC<FACButtonLightProps> = ({
+  buttonLabel,
   buttonClassname,
+  type = "button",
+  children,
   ...rest
 }) => {
   return (
     <Button
-      type={buttonType}
+      type={type}
       className={classNames(
         styles.button,
         styles["button-light"],
-        buttonClassname,
+        buttonClassname
       )}
-      label={buttonText}
-      onClick={buttonAction}
-      icon={buttonIcon}
+      label={buttonLabel}
       {...rest}
-    />
+    >
+      {children && children}
+    </Button>
   );
 };
 

@@ -1,30 +1,33 @@
 import React, { FC } from "react";
-import { Button } from "primereact/button";
-import { FACButtonProps } from "@/components/Button/ButtonLight";
+import { Button, ButtonProps } from "primereact/button";
 import { classNames } from "primereact/utils";
 import styles from "./Button.module.scss";
 
-const FACButtonDark: FC<FACButtonProps> = ({
-  buttonText,
-  buttonAction,
-  buttonIcon,
-  buttonType,
+export type FACButtonDarkProps = {
+  buttonLabel: string;
+  buttonClassname?: string;
+} & ButtonProps;
+
+const FACButtonDark: FC<FACButtonDarkProps> = ({
+  buttonLabel,
   buttonClassname,
+  type = "button",
+  children,
   ...rest
 }) => {
   return (
     <Button
-      type={buttonType}
+      type={type}
       className={classNames(
         styles.button,
         styles["button-dark"],
-        buttonClassname,
+        buttonClassname
       )}
-      label={buttonText}
-      onClick={buttonAction}
-      icon={buttonIcon}
+      label={buttonLabel}
       {...rest}
-    />
+    >
+      {children && children}
+    </Button>
   );
 };
 

@@ -201,30 +201,30 @@ const App = () => {
       />
       <div className="mb-2"></div>
       <FACButtonLight
-        buttonAction={() => console.log("button 1")}
-        buttonText="Click 1"
+        onClick={() => console.log("button 1")}
+        buttonLabel="Click 1"
       />
       <div className="mb-2"></div>
       <FACButtonLight
-        buttonAction={() => console.log("button 2")}
-        buttonText="Click 1"
-        buttonIcon={<i className={PrimeIcons.BELL}></i>}
+        onClick={() => console.log("button 2")}
+        buttonLabel="Click 1"
+        icon={<i className={PrimeIcons.BELL}></i>}
       />
       <div className="mb-2"></div>
       <FACButtonDark
-        buttonAction={() => console.log("button 1")}
-        buttonText="Click 1"
+        onClick={() => console.log("button 1")}
+        buttonLabel="Click 1"
       />
       <div className="mb-2"></div>
       <FACButtonDark
-        buttonAction={() => console.log("button 2")}
-        buttonText="Click 1"
-        buttonIcon={<i className={PrimeIcons.BELL}></i>}
+        onClick={() => console.log("button 2")}
+        buttonLabel="Click 1"
+        icon={<i className={PrimeIcons.BELL}></i>}
       />
       <div className="mb-2"></div>
       <FACButtonLight
-        buttonAction={() => setIsModuleShown(true)}
-        buttonText="Click to open module"
+        onClick={() => setIsModuleShown(true)}
+        buttonLabel="Click to open module"
       />
       <FACModule
         visible={isModuleShown}
