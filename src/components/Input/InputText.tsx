@@ -7,17 +7,15 @@ import styles from "./Input.module.scss";
 export type FACInputTextProps = {
   inputLabel?: string;
   inputPlaceholder?: string;
-  inputValue?: string | null | undefined;
-  inputAction?: (e: InputTextProps) => void;
   inputIcon?: ReactNode;
   inputClassname?: string;
 } & InputTextProps;
 
 const FACInputText: FC<FACInputTextProps> = ({
+  value = "",
+  onChange,
   inputLabel,
   inputPlaceholder,
-  inputValue,
-  inputAction,
   inputIcon,
   inputClassname,
   required,
@@ -40,8 +38,8 @@ const FACInputText: FC<FACInputTextProps> = ({
         className={classNames(inputClassname)}
         id={uniqueID}
         placeholder={inputPlaceholder}
-        value={inputValue}
-        onChange={inputAction}
+        value={value}
+        onChange={onChange}
         {...rest}
       />
       {inputIcon && <div className={styles.icon}>{inputIcon}</div>}

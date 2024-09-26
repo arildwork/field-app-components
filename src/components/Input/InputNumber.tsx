@@ -7,17 +7,15 @@ import { InputNumber, InputNumberProps } from "primereact/inputnumber";
 export type FACInputNumberProps = {
   inputLabel?: string;
   inputPlaceholder?: string;
-  inputValue?: number | null | undefined;
-  inputAction?: (e: InputNumberProps) => void;
   inputIcon?: ReactNode;
   inputClassname?: string;
 } & InputNumberProps;
 
 const FACInputNumber: FC<FACInputNumberProps> = ({
+  value,
+  onChange,
   inputLabel,
   inputPlaceholder,
-  inputValue,
-  inputAction,
   inputIcon,
   inputClassname,
   ...rest
@@ -35,8 +33,8 @@ const FACInputNumber: FC<FACInputNumberProps> = ({
         className={classNames(inputClassname)}
         id={uniqueID}
         placeholder={inputPlaceholder}
-        value={inputValue}
-        onChange={inputAction}
+        value={value}
+        onChange={onChange}
         {...rest}
       />
       {inputIcon && <div className={styles.icon}>{inputIcon}</div>}

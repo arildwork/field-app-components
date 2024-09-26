@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ChangeEvent, ReactNode, useState } from "react";
 import { PrimeIcons } from "primereact/api";
 import { InputTextProps } from "primereact/inputtext";
 import { CalendarDateTemplateEvent } from "primereact/calendar";
@@ -14,7 +14,10 @@ import FACModule from "@/components/Module/Module";
 import "./styles/main.scss";
 import FACInputText from "@/components/Input/InputText";
 import FACInputUpload from "@/components/Input/InputUpload";
-import { InputNumberProps } from "primereact/inputnumber";
+import {
+  InputNumberChangeEvent,
+  InputNumberProps,
+} from "primereact/inputnumber";
 import FACInputSwitch from "@/components/Input/InputSwitch";
 import { ColumnModel } from "@/components/Datatable/Datatable";
 import { MaterialDatatableModel } from "@/components/Datatable/MaterialDatatable";
@@ -69,16 +72,16 @@ const columns: ColumnModel[] = [
 const App = () => {
   const [newDate, setNewDate] = useState<Date>();
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null,
+    null
   );
-  const [numberValue, setNumberValue] = useState<number | null | undefined>(50);
-  const [textValue, setTextValue] = useState<string | null | undefined>("test");
+  const [numberValue, setNumberValue] = useState<number>();
+  const [textValue, setTextValue] = useState<string>("");
   const [isModuleShown, setIsModuleShown] = useState(false);
   const [updatedCountries, setUpdatedCountries] =
     useState<OptionsModel[]>(countries);
   const [fileUploaded, setFileUploaded] = useState<File | null>(null);
   const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
-    inputSwitchOptions[0],
+    inputSwitchOptions[0]
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
@@ -150,8 +153,8 @@ const App = () => {
       <FACInputNumber
         inputLabel="test Label"
         inputPlaceholder="Test placeholder"
-        inputValue={numberValue}
-        inputAction={(e: InputNumberProps) => setNumberValue(e.value)}
+        value={numberValue}
+        onChange={(e: InputNumberChangeEvent) => setNumberValue(e.value ?? 0)}
         useGrouping={false}
         showButtons
       />
@@ -159,23 +162,27 @@ const App = () => {
       <FACInputNumber
         inputLabel="test Label"
         inputPlaceholder="Test placeholder"
-        inputValue={numberValue}
-        inputAction={(e: InputNumberProps) => setNumberValue(e.value)}
+        value={numberValue}
+        onChange={(e: InputNumberChangeEvent) => setNumberValue(e.value ?? 0)}
         inputIcon={<i className={PrimeIcons.PENCIL}></i>}
       />
       <div className="mb-2"></div>
       <FACInputText
         inputLabel="test Label"
         inputPlaceholder="Test placeholder"
-        inputValue={textValue}
-        inputAction={(e: InputTextProps) => setTextValue(e.value)}
+        value={textValue}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setTextValue(e.target.value ?? "")
+        }
       />
       <div className="mb-2"></div>
       <FACInputText
         inputLabel="test Label"
         inputPlaceholder="Test placeholder"
-        inputValue={textValue}
-        inputAction={(e: InputTextProps) => setTextValue(e.value)}
+        value={textValue}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setTextValue(e.target.value ?? "")
+        }
         inputIcon={<i className={PrimeIcons.PENCIL}></i>}
       />
       <div className="mb-2"></div>
@@ -183,7 +190,7 @@ const App = () => {
       <div className="mb-2"></div>
       <FACInputSwitch
         inputOptions={inputSwitchOptions}
-        inputAction={(e) => setInputSwitch(e.value)}
+        onChange={(e) => setInputSwitch(e.value)}
         inputValue={inputSwitch}
       />
       <div className="mb-2"></div>

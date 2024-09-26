@@ -1,22 +1,17 @@
 import React, { FC } from "react";
 import styles from "./Input.module.scss";
-import {
-  SelectButton,
-  SelectButtonChangeEvent,
-  SelectButtonProps,
-} from "primereact/selectbutton";
+import { SelectButton, SelectButtonProps } from "primereact/selectbutton";
 import { OptionsModel } from "@/components/Select/Select";
 
 export type FACInputSwitchProps = {
   inputValue: OptionsModel;
   inputOptions: OptionsModel[];
-  inputAction: (e: SelectButtonChangeEvent) => void;
 } & SelectButtonProps;
 
 const FACInputSwitch: FC<FACInputSwitchProps> = ({
   inputValue,
   inputOptions,
-  inputAction,
+  onChange,
   ...rest
 }) => {
   return (
@@ -25,7 +20,7 @@ const FACInputSwitch: FC<FACInputSwitchProps> = ({
         value={inputValue}
         options={inputOptions}
         optionLabel="name"
-        onChange={inputAction}
+        onChange={onChange}
         allowEmpty={false}
         {...rest}
       />
