@@ -131,6 +131,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
           <label>{getLabelText()}</label>
           <div>
             <button
+              type="button"
               id={`switch-calendar-view-${uniqueId}`}
               className={styles["calendar-btn"]}
               onClick={() => setDefaultCalendar((prev) => !prev)}
@@ -152,6 +153,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
             />
 
             <button
+              type="button"
               id={`previous-week-${uniqueId}`}
               onClick={handlePreviousClick}
               disabled={moment(startDate).isSameOrBefore(
@@ -166,6 +168,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
             <Tooltip target={`#previous-week-${uniqueId}`} position="bottom" />
 
             <button
+              type="button"
               id={`next-week-${uniqueId}`}
               onClick={handleNextClick}
               disabled={

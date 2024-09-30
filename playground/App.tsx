@@ -72,7 +72,7 @@ const columns: ColumnModel[] = [
 const App = () => {
   const [newDate, setNewDate] = useState<Date>();
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null
+    null,
   );
   const [numberValue, setNumberValue] = useState<number>();
   const [textValue, setTextValue] = useState<string>("");
@@ -81,7 +81,7 @@ const App = () => {
     useState<OptionsModel[]>(countries);
   const [fileUploaded, setFileUploaded] = useState<File | null>(null);
   const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
-    inputSwitchOptions[0]
+    inputSwitchOptions[0],
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
@@ -115,6 +115,7 @@ const App = () => {
         optionLabel="name"
         setValue={(e) => setSelectedCountry(e.value)}
         icon={<i className={PrimeIcons.CLOCK}></i>}
+        selectLabel="test"
       />
       <div className="mb-2"></div>
       <FACSelect
@@ -148,6 +149,7 @@ const App = () => {
         setValue={(e) => setSelectedCountry(e.value)}
         modalHeader={"Header 1"}
         filter
+        selectWithAddLabel="test two"
       />
       <div className="mb-2"></div>
       <FACInputNumber

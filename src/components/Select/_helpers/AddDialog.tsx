@@ -51,11 +51,7 @@ const AddDialog: FC<AddDialogProps> = ({ formOutput, formClose }) => {
           buttonLabel="Cancel"
           onClick={formClose}
         />
-        <FACButtonDark
-          type="submit"
-          buttonLabel="Save"
-          onClick={() => console.log("submit")}
-        />
+        <FACButtonDark type="submit" buttonLabel="Save" />
       </div>
     </form>
   );

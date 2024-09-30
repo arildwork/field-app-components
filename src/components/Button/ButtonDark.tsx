@@ -4,7 +4,7 @@ import { classNames } from "primereact/utils";
 import styles from "./Button.module.scss";
 
 export type FACButtonDarkProps = {
-  buttonLabel: string;
+  buttonLabel?: string;
   buttonClassname?: string;
 } & ButtonProps;
 
@@ -16,18 +16,32 @@ const FACButtonDark: FC<FACButtonDarkProps> = ({
   ...rest
 }) => {
   return (
-    <Button
-      type={type}
-      className={classNames(
-        styles.button,
-        styles["button-dark"],
-        buttonClassname
+    <>
+      {children ? (
+        <Button
+          type={type}
+          className={classNames(
+            styles.button,
+            styles["button-dark"],
+            buttonClassname,
+          )}
+          {...rest}
+        >
+          {children}
+        </Button>
+      ) : (
+        <Button
+          type={type}
+          className={classNames(
+            styles.button,
+            styles["button-dark"],
+            buttonClassname,
+          )}
+          label={buttonLabel}
+          {...rest}
+        />
       )}
-      label={buttonLabel}
-      {...rest}
-    >
-      {children && children}
-    </Button>
+    </>
   );
 };
 

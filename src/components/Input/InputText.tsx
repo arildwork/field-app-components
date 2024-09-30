@@ -12,7 +12,7 @@ export type FACInputTextProps = {
 } & InputTextProps;
 
 const FACInputText: FC<FACInputTextProps> = ({
-  value = "",
+  value,
   onChange,
   inputLabel,
   inputPlaceholder,
@@ -40,6 +40,7 @@ const FACInputText: FC<FACInputTextProps> = ({
         placeholder={inputPlaceholder}
         value={value}
         onChange={onChange}
+        required={required}
         {...rest}
       />
       {inputIcon && <div className={styles.icon}>{inputIcon}</div>}

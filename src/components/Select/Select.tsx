@@ -2,6 +2,7 @@ import { DropdownChangeEvent, DropdownProps } from "primereact/dropdown";
 import React, { FC, ReactNode } from "react";
 import Dropdown from "@/components/_helpers/Dropdown/Dropdown";
 import styles from "./Select.module.scss";
+import { v4 } from "uuid";
 
 export type FCASelectProps = {
   value: OptionsModel | null;
@@ -10,6 +11,7 @@ export type FCASelectProps = {
   setValue: (e: DropdownChangeEvent) => void;
   filter?: boolean;
   icon?: ReactNode;
+  selectLabel?: string;
 } & DropdownProps;
 
 export type OptionsModel = {
@@ -24,10 +26,14 @@ const FACSelect: FC<FCASelectProps> = ({
   setValue,
   filter,
   icon,
+  selectLabel,
   ...rest
 }) => {
+  const uniqueID = v4();
+
   const DropdownComponent: FC = () => (
     <Dropdown
+      id={uniqueID}
       value={value}
       onChange={setValue}
       options={options}
@@ -41,7 +47,8 @@ const FACSelect: FC<FCASelectProps> = ({
   );
 
   return (
-    <>
+    <div className={styles["select-wrapper"]}>
+      {selectLabel && <label htmlFor={uniqueID}>{selectLabel}</label>}
       {icon ? (
         <div className={styles.select}>
           <div className={styles.icon}>{icon}</div>
@@ -50,7 +57,7 @@ const FACSelect: FC<FCASelectProps> = ({
       ) : (
         <DropdownComponent />
       )}
-    </>
+    </div>
   );
 };
 

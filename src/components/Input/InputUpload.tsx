@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import {
   FileUpload,
   FileUploadProps,
@@ -8,33 +8,39 @@ import { v4 } from "uuid";
 import styles from "./Input.module.scss";
 
 export type FACInputUploadProps = {
-  onFileSelect: (file: File | null) => void;
+  onFileSelect: (file: File | null | undefined) => void;
   inputMaxFileSize?: number;
   inputLabel?: string;
+  value?: File | null;
 } & FileUploadProps;
 
 const FACInputUpload: FC<FACInputUploadProps> = ({
   onFileSelect,
   inputMaxFileSize = 8 * 1024 * 1024,
   inputLabel,
+  value,
   ...rest
 }) => {
   const uniqueID = v4();
 
   const handleSelect = (e: FileUploadSelectEvent) => {
-    const file = e.files && e.files[0];
+    const selectedFile = e.files && e.files[0];
 
-    if (!file) return;
-    if (file.type !== "application/pdf") {
+    if (!selectedFile) return;
+    if (selectedFile.type !== "application/pdf") {
       onFileSelect(null);
       return;
     }
-    if (file.size > inputMaxFileSize) {
+    if (selectedFile.size > inputMaxFileSize) {
       onFileSelect(null);
       return;
     }
-    onFileSelect(file);
+    onFileSelect(selectedFile);
   };
+
+  useEffect(() => {
+    onFileSelect(value);
+  }, [value]);
 
   return (
     <div className={styles.input}>
@@ -46,8 +52,11 @@ const FACInputUpload: FC<FACInputUploadProps> = ({
         maxFileSize={inputMaxFileSize}
         auto={false}
         customUpload
-        onSelect={handleSelect}
         chooseLabel="Select PDF file"
+        onSelect={handleSelect}
+        onClear={() => {
+          onFileSelect(null);
+        }}
         {...rest}
       />
     </div>
