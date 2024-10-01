@@ -21,7 +21,7 @@ export type MaterialDatatableModel = {
   materialIDSupplier: string;
   materialNameSupplier: string;
   deliveredQuantity: number;
-  // unitOfMeasure: string;
+  unitOfMeasure: string;
 };
 
 export enum MaterialDatatableModelEnum {

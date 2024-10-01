@@ -1,6 +1,5 @@
 import React, { ChangeEvent, ReactNode, useState } from "react";
 import { PrimeIcons } from "primereact/api";
-import { InputTextProps } from "primereact/inputtext";
 import { CalendarDateTemplateEvent } from "primereact/calendar";
 import FACSelect, { OptionsModel } from "@/components/Select/Select";
 import FACSelectWithAdd from "@/components/Select/SelectWithAdd";
@@ -14,10 +13,7 @@ import FACModule from "@/components/Module/Module";
 import "./styles/main.scss";
 import FACInputText from "@/components/Input/InputText";
 import FACInputUpload from "@/components/Input/InputUpload";
-import {
-  InputNumberChangeEvent,
-  InputNumberProps,
-} from "primereact/inputnumber";
+import { InputNumberChangeEvent } from "primereact/inputnumber";
 import FACInputSwitch from "@/components/Input/InputSwitch";
 import { ColumnModel } from "@/components/Datatable/Datatable";
 import { MaterialDatatableModel } from "@/components/Datatable/MaterialDatatable";
@@ -58,6 +54,7 @@ const dataTableItems: MaterialDatatableModel[] = [
     materialIDSupplier: "A555",
     materialNameSupplier: "C12/15",
     deliveredQuantity: 10,
+    unitOfMeasure: "m3/h",
   },
 ];
 
@@ -66,22 +63,24 @@ const columns: ColumnModel[] = [
   { field: "materialIDSupplier", header: "Material ID Supplier" },
   { field: "materialNameSupplier", header: "Material Name Supplier" },
   { field: "deliveredQuantity", header: "Delivered Quantity" },
-  // { field: "unitOfMeasure", header: "UoM" },
+  { field: "unitOfMeasure", header: "UoM" },
 ];
 
 const App = () => {
   const [newDate, setNewDate] = useState<Date>();
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null,
+    null
   );
   const [numberValue, setNumberValue] = useState<number>();
   const [textValue, setTextValue] = useState<string>("");
   const [isModuleShown, setIsModuleShown] = useState(false);
   const [updatedCountries, setUpdatedCountries] =
     useState<OptionsModel[]>(countries);
-  const [fileUploaded, setFileUploaded] = useState<File | null>(null);
+  const [fileUploaded, setFileUploaded] = useState<File | null | undefined>(
+    null
+  );
   const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
-    inputSwitchOptions[0],
+    inputSwitchOptions[0]
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
