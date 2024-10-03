@@ -22,6 +22,11 @@
   [class~="p-dropdown"] {
     height: 42px;
     border: 0;
+
+    &[class~="p-focus"] {
+      box-shadow: none;
+      outline: 1px solid var(--steel-blue);
+    }
   }
 
   .add-button {
@@ -86,7 +91,14 @@
 
 .form {
   .form-action {
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
+  }
+
+  .error-code {
+    font: 400 12px var(--main-font);
+    color: var(--warning);
+    margin-bottom: 10px;
   }
 }

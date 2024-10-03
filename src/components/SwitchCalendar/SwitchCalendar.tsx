@@ -27,6 +27,7 @@ export type FCASwitchCalendarProps = {
   isMandatory?: boolean;
   dateTemplate: (date: CalendarDateTemplateEvent) => ReactNode;
   error?: string;
+  touched?: boolean;
   onDateClick: (date: Date) => void;
   language: string;
   translationKeywords: CalendarTranslationKeywords;
@@ -50,6 +51,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
   isMandatory,
   dateTemplate,
   error,
+  touched,
   onDateClick,
   language,
   translationKeywords,
@@ -62,7 +64,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
 
   const uniqueId = v4();
 
-  const errorClassName = error ? styles["error-input"] : undefined;
+  const errorClassName = error || touched ? styles["error-input"] : undefined;
   const getLabelText = () => `${labelText} ${isMandatory ? "*" : ""}`;
   const computedDate = moment(value).locale(language);
   const todayDate = moment().locale(language);
@@ -112,7 +114,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
           handleDateClick={onDateClick}
           language={language}
           handleDisableDateClick={() => setDisabledDayModal(true)}
-        />,
+        />
       );
     }
 
@@ -152,36 +154,43 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
               position="bottom"
             />
 
-            <button
-              type="button"
-              id={`previous-week-${uniqueId}`}
-              onClick={handlePreviousClick}
-              disabled={moment(startDate).isSameOrBefore(
-                effectiveMinDate,
-                "day",
-              )}
-              className={styles["scroll-btn"]}
-              data-pr-tooltip={translationKeywords.tooltipPreviousWeek}
-            >
-              <i className={PrimeIcons.ANGLE_LEFT} />
-            </button>
-            <Tooltip target={`#previous-week-${uniqueId}`} position="bottom" />
+            {defaultCalendar && (
+              <>
+                <button
+                  type="button"
+                  id={`previous-week-${uniqueId}`}
+                  onClick={handlePreviousClick}
+                  disabled={moment(startDate).isSameOrBefore(
+                    effectiveMinDate,
+                    "day"
+                  )}
+                  className={styles["scroll-btn"]}
+                  data-pr-tooltip={translationKeywords.tooltipPreviousWeek}
+                >
+                  <i className={PrimeIcons.ANGLE_LEFT} />
+                </button>
+                <Tooltip
+                  target={`#previous-week-${uniqueId}`}
+                  position="bottom"
+                />
 
-            <button
-              type="button"
-              id={`next-week-${uniqueId}`}
-              onClick={handleNextClick}
-              disabled={
-                direction === "backward"
-                  ? moment(startDate).isSameOrAfter(todayDate, "day")
-                  : false
-              }
-              className={styles["scroll-btn"]}
-              data-pr-tooltip={translationKeywords.tooltipNextWeek}
-            >
-              <i className={PrimeIcons.ANGLE_RIGHT} />
-            </button>
-            <Tooltip target={`#next-week-${uniqueId}`} position="bottom" />
+                <button
+                  type="button"
+                  id={`next-week-${uniqueId}`}
+                  onClick={handleNextClick}
+                  disabled={
+                    direction === "backward"
+                      ? moment(startDate).isSameOrAfter(todayDate, "day")
+                      : false
+                  }
+                  className={styles["scroll-btn"]}
+                  data-pr-tooltip={translationKeywords.tooltipNextWeek}
+                >
+                  <i className={PrimeIcons.ANGLE_RIGHT} />
+                </button>
+                <Tooltip target={`#next-week-${uniqueId}`} position="bottom" />
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -201,14 +210,14 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
             </h6>
 
             <div className={styles["week-day"]}>{renderWeekDays()}</div>
-            {error ? <ValidationImage /> : null}
+            {error || touched ? <ValidationImage /> : null}
           </div>
         ) : (
           <div
             className={classNames(
               styles["calendar-container"],
               styles.simplified,
-              errorClassName,
+              errorClassName
             )}
           >
             <Calendar
@@ -222,13 +231,14 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
               baseZIndex={30}
               className={styles["scrollable-calendar-input"]}
               showIcon
+              onChange={(e) => onDateClick(moment(e.value).toDate())}
               {...rest}
             />
-            {error ? <ValidationImage fieldWithIcon /> : null}
+            {error || touched ? <ValidationImage fieldWithIcon /> : null}
           </div>
         )}
       </div>
-      {error ? (
+      {error || touched ? (
         <ValidationText text={translationKeywords.errorFillOutField} />
       ) : null}
       <FACModule

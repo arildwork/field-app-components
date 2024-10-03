@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode, useState } from "react";
+import React, { ChangeEvent, FormEvent, ReactNode, useState } from "react";
 import { PrimeIcons } from "primereact/api";
 import { CalendarDateTemplateEvent } from "primereact/calendar";
 import FACSelect, { OptionsModel } from "@/components/Select/Select";
@@ -85,7 +85,14 @@ const App = () => {
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
 
-  console.log(inputSwitch);
+  const testSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(fileUploaded);
+  };
+
+  const testResetHandler = () => {
+    setFileUploaded(null);
+  };
 
   return (
     <div className="container pt-2 pb-2">
@@ -102,7 +109,8 @@ const App = () => {
         // maxDate={new Date(new Date().setDate(new Date().getDate() + 20))}
         onDateClick={(date) => setNewDate(date)}
         dateTemplate={dateTemplate}
-        error={""}
+        error={"test"}
+        touched={true}
         language="en"
         translationKeywords={calendarTranslationKeywords}
         direction="backward"
@@ -158,6 +166,8 @@ const App = () => {
         onChange={(e: InputNumberChangeEvent) => setNumberValue(e.value ?? 0)}
         useGrouping={false}
         showButtons
+        error={"dfsd"}
+        touched={true}
       />
       <div className="mb-2"></div>
       <FACInputNumber
@@ -187,7 +197,12 @@ const App = () => {
         inputIcon={<i className={PrimeIcons.PENCIL}></i>}
       />
       <div className="mb-2"></div>
-      <FACInputUpload onFileSelect={setFileUploaded} inputLabel="Upload" />
+      <FACInputUpload
+        onFileSelect={setFileUploaded}
+        inputLabel="Upload"
+        error={"ret"}
+        touched={true}
+      />
       <div className="mb-2"></div>
       <FACInputSwitch
         inputOptions={inputSwitchOptions}
@@ -257,6 +272,21 @@ const App = () => {
         </p>
       </FACAccordion>
       <div className="mt-2"></div>
+
+      <form onSubmit={testSubmitHandler}>
+        <FACInputUpload
+          name="upload"
+          onFileSelect={setFileUploaded}
+          value={fileUploaded}
+          inputLabel="Upload"
+        />
+
+        <div></div>
+        <button type="submit">submit</button>
+        <button type="button" onClick={testResetHandler}>
+          reset
+        </button>
+      </form>
     </div>
   );
 };

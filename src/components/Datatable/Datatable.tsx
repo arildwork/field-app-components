@@ -24,8 +24,6 @@ const FACDatatable = <T extends DatatableRowData<any>>({
   frozenHeader,
   ...rest
 }: FACDatatableProps<T>) => {
-  console.log(datatableOptions);
-
   return (
     <div className={styles.datatable}>
       <DataTable value={datatableOptions} editMode="cell" {...rest}>

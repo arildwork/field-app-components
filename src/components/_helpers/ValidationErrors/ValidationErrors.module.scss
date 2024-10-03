@@ -3,12 +3,16 @@
   right: 15px;
   top: 15px;
   pointer-events: none;
+
+  img {
+    width: 15px;
+  }
 }
 
 .validation-image-icon {
   position: absolute;
   right: 50px;
-  top: 17px;
+  top: 15px;
   pointer-events: none;
 }
 

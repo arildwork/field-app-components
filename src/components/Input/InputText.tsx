@@ -1,3 +1,7 @@
+import {
+  ValidationImage,
+  ValidationText,
+} from "@/components/_helpers/ValidationErrors/ValidationErrors";
 import React, { FC, ReactNode } from "react";
 import { InputText, InputTextProps } from "primereact/inputtext";
 import { v4 } from "uuid";
@@ -9,6 +13,8 @@ export type FACInputTextProps = {
   inputPlaceholder?: string;
   inputIcon?: ReactNode;
   inputClassname?: string;
+  error?: string;
+  touched?: boolean;
 } & InputTextProps;
 
 const FACInputText: FC<FACInputTextProps> = ({
@@ -19,6 +25,8 @@ const FACInputText: FC<FACInputTextProps> = ({
   inputIcon,
   inputClassname,
   required,
+  error,
+  touched,
   ...rest
 }) => {
   const uniqueID = v4();
@@ -31,19 +39,30 @@ const FACInputText: FC<FACInputTextProps> = ({
     >
       {inputLabel && (
         <label htmlFor={uniqueID}>
-          {required ? `${inputLabel}*` : inputLabel}
+          {required ? `${inputLabel} *` : inputLabel}
         </label>
       )}
-      <InputText
-        className={classNames(inputClassname)}
-        id={uniqueID}
-        placeholder={inputPlaceholder}
-        value={value}
-        onChange={onChange}
-        required={required}
-        {...rest}
-      />
-      {inputIcon && <div className={styles.icon}>{inputIcon}</div>}
+      <div
+        className={classNames(styles["input-wrapper"], {
+          [styles["input-error"]]: error || touched,
+        })}
+      >
+        <InputText
+          className={classNames(inputClassname)}
+          id={uniqueID}
+          placeholder={inputPlaceholder}
+          value={value}
+          onChange={onChange}
+          required={required}
+          {...rest}
+        />
+        {error || touched ? (
+          <ValidationImage />
+        ) : (
+          inputIcon && <div className={styles.icon}>{inputIcon}</div>
+        )}
+        {error || touched ? <ValidationText text={error ? error : ""} /> : null}
+      </div>
     </div>
   );
 };

@@ -72,8 +72,6 @@
 
   &-icon,
   [class~="p-inputnumber"] .input-icon {
-    position: relative;
-
     [class~="p-inputnumber-input"],
     [class~="p-inputtext"] {
       padding-right: 44px;
@@ -81,9 +79,13 @@
 
     .icon {
       position: absolute;
-      right: 20px;
-      bottom: 10px;
       color: var(--neutral-light);
+      top: 0;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      width: 35px;
 
       i {
         font-size: 14px;
@@ -155,6 +157,18 @@
       &:not([class~="p-highlight"]) {
         margin: 1px;
       }
+    }
+  }
+}
+
+.input-wrapper {
+  position: relative;
+
+  &.input-error {
+    [class~="p-inputtext"],
+    [class~="p-inputnumber"],
+    [class~="p-fileupload-choose"] {
+      border-color: var(--warning);
     }
   }
 }

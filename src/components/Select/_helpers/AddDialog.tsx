@@ -1,6 +1,6 @@
 import FACButtonDark from "@/components/Button/ButtonDark";
 import FACButtonLight from "@/components/Button/ButtonLight";
-import { FC, FormEvent } from "react";
+import { FC, useState } from "react";
 import FACInputText from "@/components/Input/InputText";
 import { OptionsModel } from "@/components/Select/Select";
 import styles from "@/components/Select/Select.module.scss";
@@ -11,16 +11,19 @@ export type AddDialogProps = {
 };
 
 const AddDialog: FC<AddDialogProps> = ({ formOutput, formClose }) => {
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [name, setName] = useState<string>("");
+  const [code, setCode] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
-    const formElements = e.currentTarget.elements as HTMLFormControlsCollection;
-    const nameInput = formElements.namedItem("name") as HTMLInputElement;
-    const codeInput = formElements.namedItem("code") as HTMLInputElement;
+  const submitHandler = () => {
+    if (!name.trim() || !code.trim()) {
+      setError("Both Name and Code are required!");
+      return;
+    }
 
     const formData: OptionsModel = {
-      name: nameInput.value,
-      code: codeInput.value,
+      name,
+      code,
     };
 
     formOutput(formData);
@@ -28,22 +31,35 @@ const AddDialog: FC<AddDialogProps> = ({ formOutput, formClose }) => {
   };
 
   return (
-    <form onSubmit={submitHandler} method="post" className={styles.form}>
+    <div className={styles.form}>
       <FACInputText
-        style={{ marginBottom: "20px" }}
         type="text"
         name="name"
         inputLabel="Name"
         inputPlaceholder="Name"
         required
+        value={name}
+        error={error}
+        touched={!!error}
+        onChange={(e) => {
+          setName(e.target.value);
+          if (error) setError("");
+        }}
       />
+      <div style={{ marginBottom: "20px" }}></div>
       <FACInputText
-        style={{ marginBottom: "20px" }}
         type="text"
         name="code"
         inputLabel="Code"
         inputPlaceholder="Code"
         required
+        value={code}
+        error={error}
+        touched={!!error}
+        onChange={(e) => {
+          setCode(e.target.value);
+          if (error) setError("");
+        }}
       />
       <div className={styles["form-action"]}>
         <FACButtonLight
@@ -51,9 +67,13 @@ const AddDialog: FC<AddDialogProps> = ({ formOutput, formClose }) => {
           buttonLabel="Cancel"
           onClick={formClose}
         />
-        <FACButtonDark type="submit" buttonLabel="Save" />
+        <FACButtonDark
+          type="button"
+          buttonLabel="Save"
+          onClick={submitHandler}
+        />
       </div>
-    </form>
+    </div>
   );
 };
 
