@@ -64,7 +64,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
 
   const uniqueId = v4();
 
-  const errorClassName = error || touched ? styles["error-input"] : undefined;
+  const errorClassName = error && touched ? styles["error-input"] : undefined;
   const getLabelText = () => `${labelText} ${isMandatory ? "*" : ""}`;
   const computedDate = moment(value).locale(language);
   const todayDate = moment().locale(language);
@@ -114,7 +114,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
           handleDateClick={onDateClick}
           language={language}
           handleDisableDateClick={() => setDisabledDayModal(true)}
-        />
+        />,
       );
     }
 
@@ -162,7 +162,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
                   onClick={handlePreviousClick}
                   disabled={moment(startDate).isSameOrBefore(
                     effectiveMinDate,
-                    "day"
+                    "day",
                   )}
                   className={styles["scroll-btn"]}
                   data-pr-tooltip={translationKeywords.tooltipPreviousWeek}
@@ -210,14 +210,14 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
             </h6>
 
             <div className={styles["week-day"]}>{renderWeekDays()}</div>
-            {error || touched ? <ValidationImage /> : null}
+            {error && touched ? <ValidationImage /> : null}
           </div>
         ) : (
           <div
             className={classNames(
               styles["calendar-container"],
               styles.simplified,
-              errorClassName
+              errorClassName,
             )}
           >
             <Calendar
@@ -234,11 +234,11 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
               onChange={(e) => onDateClick(moment(e.value).toDate())}
               {...rest}
             />
-            {error || touched ? <ValidationImage fieldWithIcon /> : null}
+            {error && touched ? <ValidationImage fieldWithIcon /> : null}
           </div>
         )}
       </div>
-      {error || touched ? (
+      {error && touched ? (
         <ValidationText text={translationKeywords.errorFillOutField} />
       ) : null}
       <FACModule

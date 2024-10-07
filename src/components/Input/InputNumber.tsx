@@ -44,7 +44,7 @@ const FACInputNumber: FC<FACInputNumberProps> = ({
       )}
       <div
         className={classNames(styles["input-wrapper"], {
-          [styles["input-error"]]: error || touched,
+          [styles["input-error"]]: error && touched,
         })}
       >
         <InputNumber
@@ -55,12 +55,12 @@ const FACInputNumber: FC<FACInputNumberProps> = ({
           onChange={onChange}
           {...rest}
         />
-        {error || touched ? (
+        {error && touched ? (
           <ValidationImage fieldWithIcon />
         ) : (
           inputIcon && <div className={styles.icon}>{inputIcon}</div>
         )}
-        {error || touched ? <ValidationText text={error ? error : ""} /> : null}
+        {error && touched ? <ValidationText text={error ? error : ""} /> : null}
       </div>
     </div>
   );

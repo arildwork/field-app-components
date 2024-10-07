@@ -14,6 +14,7 @@
   border-radius: var(--border-8);
   background: var(--white);
   transition: all 0.3s ease;
+  position: relative;
 
   &:hover {
     border: 1px solid var(--steel-blue);
@@ -55,7 +56,6 @@
 
 .select {
   display: flex;
-  position: relative;
 
   [class~="p-dropdown"] {
     border: 0;
@@ -89,6 +89,14 @@
   }
 }
 
+.select-no-icon {
+  &.select-error {
+    [class~="p-dropdown"] {
+      border-color: var(--warning);
+    }
+  }
+}
+
 .form {
   .form-action {
     margin-top: 20px;
@@ -101,4 +109,9 @@
     color: var(--warning);
     margin-bottom: 10px;
   }
+}
+
+.select-error {
+  position: relative;
+  border-color: var(--warning);
 }

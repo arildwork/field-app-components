@@ -1,8 +1,11 @@
 .accordion {
+  position: relative;
+
   [class~="p-accordion"] {
     box-shadow: var(--shadow-accordion);
     border-radius: var(--border-8);
     background: var(--white);
+    border: 1px solid transparent;
 
     [class~="p-accordion-tab"] {
       [class~="p-accordion-header-link"] {
@@ -32,6 +35,12 @@
         border: none;
         font-size: 12px;
       }
+    }
+  }
+
+  &-error {
+    [class~="p-accordion"] {
+      border-color: var(--warning);
     }
   }
 }

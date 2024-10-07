@@ -1,15 +1,22 @@
-import { FC, ReactNode, useState } from "react";
+import React, { FC, ReactNode, useState } from "react";
 import FACSelect, { FCASelectProps, OptionsModel } from "./Select";
 import AddDialog from "./_helpers/AddDialog";
 import FACModule from "@/components/Module/Module";
 import { PrimeIcons } from "primereact/api";
 import { v4 } from "uuid";
 import styles from "./Select.module.scss";
+import {
+  ValidationImage,
+  ValidationText,
+} from "@/components/_helpers/ValidationErrors/ValidationErrors";
+import { classNames } from "primereact/utils";
 
 export type FCASelectWithAddProps = {
   modalHeader?: ReactNode;
   updatedOptions: (option: OptionsModel) => void;
   selectWithAddLabel?: string;
+  error?: string;
+  touched?: boolean;
 } & FCASelectProps;
 
 const FACSelectWithAdd: FC<FCASelectWithAddProps> = ({
@@ -20,6 +27,9 @@ const FACSelectWithAdd: FC<FCASelectWithAddProps> = ({
   modalHeader,
   updatedOptions,
   selectWithAddLabel,
+  required,
+  error,
+  touched,
   ...rest
 }) => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -28,24 +38,34 @@ const FACSelectWithAdd: FC<FCASelectWithAddProps> = ({
   return (
     <div className={styles["select-with-add-wrapper"]}>
       {selectWithAddLabel && (
-        <label htmlFor={uniqueID}>{selectWithAddLabel}</label>
+        <label htmlFor={uniqueID}>
+          {required ? `${selectWithAddLabel} *` : selectWithAddLabel}
+        </label>
       )}
-      <div className={styles["select-with-add"]}>
-        <FACSelect
-          id={uniqueID}
-          value={value}
-          options={options}
-          optionLabel={optionLabel}
-          setValue={setValue}
-          {...rest}
-        />
-        <button
-          type="button"
-          className={styles["add-button"]}
-          onClick={() => setModalVisible(true)}
+      <div style={{ position: "relative" }}>
+        <div
+          className={classNames(styles["select-with-add"], {
+            [styles["select-error"]]: error && touched,
+          })}
         >
-          <i className={PrimeIcons.PLUS}></i>
-        </button>
+          <FACSelect
+            id={uniqueID}
+            value={value}
+            options={options}
+            optionLabel={optionLabel}
+            setValue={setValue}
+            {...rest}
+          />
+          <button
+            type="button"
+            className={styles["add-button"]}
+            onClick={() => setModalVisible(true)}
+          >
+            <i className={PrimeIcons.PLUS}></i>
+          </button>
+        </div>
+        {error && touched ? <ValidationImage fieldWithDoubleIcon /> : null}
+        {error && touched ? <ValidationText text={error ? error : ""} /> : null}
       </div>
       <FACModule
         header={modalHeader}

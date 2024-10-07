@@ -3,7 +3,7 @@ import {
   ValidationText,
 } from "@/components/_helpers/ValidationErrors/ValidationErrors";
 import { classNames } from "primereact/utils";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import {
   FileUpload,
   FileUploadProps,
@@ -50,18 +50,11 @@ const FACInputUpload: FC<FACInputUploadProps> = ({
     onFileSelect(selectedFile);
   };
 
-  const handleClear = () => {
-    onFileSelect(null);
-    fileUploadRef.current?.clear();
-  };
-
-  // useEffect(() => {
-  //   if (value === null) {
-  //     fileUploadRef.current?.clear();
-  //   }
-  // }, [value]);
-
-  console.log(value);
+  useEffect(() => {
+    if (!value && fileUploadRef.current) {
+      fileUploadRef.current.clear();
+    }
+  }, [value]);
 
   return (
     <div className={styles.input}>
@@ -85,7 +78,6 @@ const FACInputUpload: FC<FACInputUploadProps> = ({
           customUpload
           chooseLabel="Select PDF file"
           onSelect={handleSelect}
-          onClear={handleClear}
           {...rest}
         />
         {error || touched ? <ValidationImage fieldWithIcon /> : null}

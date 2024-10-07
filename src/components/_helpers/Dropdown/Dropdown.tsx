@@ -1,6 +1,5 @@
 import type { DropdownProps as PRDropdownProps } from "primereact/dropdown";
 import { Dropdown as PRDropdown } from "primereact/dropdown";
-import { Skeleton } from "primereact/skeleton";
 import { classNames } from "primereact/utils";
 import type { FC, JSX } from "react";
 import styles from "./Dropdown.module.scss";
@@ -8,7 +7,6 @@ import styles from "./Dropdown.module.scss";
 export interface DropdownProps extends PRDropdownProps {
   optionsLoading?: boolean;
   valueLoading?: boolean;
-  dataTest?: string;
   insideLoading?: boolean;
 }
 
@@ -17,7 +15,6 @@ const Dropdown: FC<DropdownProps> = ({
   panelClassName,
   optionsLoading,
   valueLoading,
-  dataTest,
   pt,
   ...props
 }): JSX.Element => {
@@ -30,7 +27,6 @@ const Dropdown: FC<DropdownProps> = ({
       emptyFilterMessage={"noResults"}
       valueTemplate={props.valueTemplate}
       loading={valueLoading}
-      loadingIcon={<Skeleton height="10px" width="100px" />}
       {...props}
       pt={{
         root: { className: classNames(styles.dropdown, className) },
@@ -38,28 +34,20 @@ const Dropdown: FC<DropdownProps> = ({
           className: classNames(styles.input, {
             [`${styles.loading}`]: valueLoading,
           }),
-          "data-test": `${dataTest}-dropdown-input`,
         },
         clearIcon: { className: styles["clear-icon"] },
         trigger: {
           className: classNames(styles.trigger, {
             [`${styles.loading}`]: valueLoading,
           }),
-          "data-test": `${dataTest}-dropdown-trigger`,
         },
         panel: {
-          className: classNames(
-            styles.panel,
-            `t-${dataTest}-dropdown-panel`,
-            panelClassName,
-          ),
+          className: classNames(styles.panel, panelClassName),
         },
 
         item: {
           className: styles.item,
-          "data-test": `${dataTest}-dropdown-item`,
         },
-        list: { "data-test": `${dataTest}-dropdown-list` },
         ...pt,
       }}
     />

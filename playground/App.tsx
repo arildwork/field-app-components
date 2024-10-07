@@ -1,4 +1,10 @@
-import React, { ChangeEvent, FormEvent, ReactNode, useState } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  ReactNode,
+  useRef,
+  useState,
+} from "react";
 import { PrimeIcons } from "primereact/api";
 import { CalendarDateTemplateEvent } from "primereact/calendar";
 import FACSelect, { OptionsModel } from "@/components/Select/Select";
@@ -69,7 +75,7 @@ const columns: ColumnModel[] = [
 const App = () => {
   const [newDate, setNewDate] = useState<Date>();
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null
+    null,
   );
   const [numberValue, setNumberValue] = useState<number>();
   const [textValue, setTextValue] = useState<string>("");
@@ -77,10 +83,10 @@ const App = () => {
   const [updatedCountries, setUpdatedCountries] =
     useState<OptionsModel[]>(countries);
   const [fileUploaded, setFileUploaded] = useState<File | null | undefined>(
-    null
+    null,
   );
   const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
-    inputSwitchOptions[0]
+    inputSwitchOptions[0],
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
@@ -123,6 +129,9 @@ const App = () => {
         setValue={(e) => setSelectedCountry(e.value)}
         icon={<i className={PrimeIcons.CLOCK}></i>}
         selectLabel="test"
+        required
+        error={"test err asd"}
+        touched={true}
       />
       <div className="mb-2"></div>
       <FACSelect
@@ -131,6 +140,9 @@ const App = () => {
         optionLabel="name"
         setValue={(e) => setSelectedCountry(e.value)}
         filter
+        selectLabel="test 2"
+        error={"test err asd"}
+        touched={true}
       />
       <div className="mb-2"></div>
       <FACSelect
@@ -157,6 +169,9 @@ const App = () => {
         modalHeader={"Header 1"}
         filter
         selectWithAddLabel="test two"
+        required
+        error={"test err asd"}
+        touched={true}
       />
       <div className="mb-2"></div>
       <FACInputNumber
@@ -248,7 +263,7 @@ const App = () => {
         moduleContent={<div>content</div>}
       />
       <div className="mt-2"></div>
-      <FACAccordion header="Header 1">
+      <FACAccordion header="Header" required error={"rete"} touched={true}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -277,10 +292,10 @@ const App = () => {
         <FACInputUpload
           name="upload"
           onFileSelect={setFileUploaded}
-          value={fileUploaded}
           inputLabel="Upload"
         />
 
+        <FACInputText />
         <div></div>
         <button type="submit">submit</button>
         <button type="button" onClick={testResetHandler}>

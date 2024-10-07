@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import {
   Accordion,
   AccordionProps,
@@ -7,24 +7,45 @@ import {
 } from "primereact/accordion";
 import { PrimeIcons } from "primereact/api";
 import styles from "./Accordion.module.scss";
+import {
+  ValidationImage,
+  ValidationText,
+} from "@/components/_helpers/ValidationErrors/ValidationErrors";
+import { classNames } from "primereact/utils";
 
-const FACAccordion: FC<AccordionProps & AccordionTabProps> = ({
+export type FACAccordionProps = {
+  error?: string;
+  touched?: boolean;
+  required?: boolean;
+} & AccordionProps &
+  AccordionTabProps;
+
+const FACAccordion: FC<FACAccordionProps> = ({
   header,
   children,
+  error,
+  touched,
+  required,
   ...rest
 }) => {
   return (
-    <div className={styles.accordion}>
+    <div
+      className={classNames(styles.accordion, {
+        [styles["accordion-error"]]: error && touched,
+      })}
+    >
       <Accordion
         multiple={true}
         collapseIcon={PrimeIcons.ANGLE_UP}
         expandIcon={PrimeIcons.ANGLE_DOWN}
         activeIndex={0}
       >
-        <AccordionTab header={header} {...rest}>
+        <AccordionTab header={required ? `${header} *` : header} {...rest}>
           {children}
         </AccordionTab>
       </Accordion>
+      {error && touched ? <ValidationImage fieldWithIcon /> : null}
+      {error && touched ? <ValidationText text={error ? error : ""} /> : null}
     </div>
   );
 };
