@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, {
   ChangeEvent,
   FormEvent,
@@ -73,9 +74,9 @@ const columns: ColumnModel[] = [
 ];
 
 const App = () => {
-  const [newDate, setNewDate] = useState<Date>();
+  const [newDate, setNewDate] = useState<string>("");
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null,
+    null
   );
   const [numberValue, setNumberValue] = useState<number>();
   const [textValue, setTextValue] = useState<string>("");
@@ -83,10 +84,10 @@ const App = () => {
   const [updatedCountries, setUpdatedCountries] =
     useState<OptionsModel[]>(countries);
   const [fileUploaded, setFileUploaded] = useState<File | null | undefined>(
-    null,
+    null
   );
   const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
-    inputSwitchOptions[0],
+    inputSwitchOptions[0]
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
@@ -100,6 +101,9 @@ const App = () => {
     setFileUploaded(null);
   };
 
+  const minimumDate = moment().subtract(360, "days");
+  const currentDate = moment();
+
   return (
     <div className="container pt-2 pb-2">
       <h1 style={{ margin: "0 0 3rem" }}>Field App Components Playground</h1>
@@ -109,14 +113,14 @@ const App = () => {
         labelText={"Delivery Date"}
         value={newDate}
         isMandatory
-        minDate={new Date(new Date().setDate(new Date().getDate() - 360))}
-        maxDate={new Date()}
+        minDate={minimumDate.toISOString()}
+        maxDate={currentDate.toISOString()}
         // minDate={new Date()}
         // maxDate={new Date(new Date().setDate(new Date().getDate() + 20))}
         onDateClick={(date) => setNewDate(date)}
         dateTemplate={dateTemplate}
-        error={"test"}
-        touched={true}
+        // error={"test"}
+        // touched={true}
         language="en"
         translationKeywords={calendarTranslationKeywords}
         direction="backward"
@@ -170,8 +174,8 @@ const App = () => {
         filter
         selectWithAddLabel="test two"
         required
-        error={"test err asd"}
-        touched={true}
+        // error={"test err asd"}
+        // touched={true}
       />
       <div className="mb-2"></div>
       <FACInputNumber

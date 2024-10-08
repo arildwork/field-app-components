@@ -1,12 +1,8 @@
 import type { FC, JSX, ReactNode } from "react";
 import { useLayoutEffect, useState } from "react";
 import moment from "moment";
-import {
-  CalendarDateTemplateEvent,
-  CalendarPropsSingle,
-} from "primereact/calendar";
+import { CalendarDateTemplateEvent } from "primereact/calendar";
 import { PrimeIcons } from "primereact/api";
-import type { Nullable } from "primereact/ts-helpers";
 import { classNames } from "primereact/utils";
 import { v4 } from "uuid";
 import styles from "./SwitchCalendar.module.scss";
@@ -20,19 +16,19 @@ import { Calendar } from "@/components/_helpers/Calendar/Calendar";
 import FACModule from "@/components/Module/Module";
 
 export type FCASwitchCalendarProps = {
-  value: Nullable<Date>;
+  value: string;
   labelText: string;
-  minDate: Date;
-  maxDate: Date;
+  minDate: string;
+  maxDate: string;
   isMandatory?: boolean;
   dateTemplate: (date: CalendarDateTemplateEvent) => ReactNode;
   error?: string;
   touched?: boolean;
-  onDateClick: (date: Date) => void;
+  onDateClick: (date: string) => void;
   language: string;
   translationKeywords: CalendarTranslationKeywords;
   direction: "forward" | "backward";
-} & CalendarPropsSingle;
+};
 
 export type CalendarTranslationKeywords = {
   actionsCalendarView: string;
@@ -58,7 +54,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
   direction,
   ...rest
 }): JSX.Element => {
-  const [startDate, setStartDate] = useState<Date>();
+  const [startDate, setStartDate] = useState<string>("");
   const [defaultCalendar, setDefaultCalendar] = useState(true);
   const [disabledDayModal, setDisabledDayModal] = useState(false);
 
@@ -69,17 +65,19 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
   const computedDate = moment(value).locale(language);
   const todayDate = moment().locale(language);
   const effectiveMinDate =
-    direction === "forward" ? todayDate.toDate() : minDate;
+    direction === "forward" ? todayDate.toISOString() : minDate;
 
   const handlePreviousClick = () => {
-    const previousStartDate = moment(startDate).subtract(7, "days").toDate();
+    const previousStartDate = moment(startDate)
+      .subtract(7, "days")
+      .toISOString();
     if (moment(previousStartDate).isSameOrAfter(effectiveMinDate, "day")) {
       setStartDate(previousStartDate);
     }
   };
 
   const handleNextClick = () => {
-    const nextStartDate = moment(startDate).add(7, "days").toDate();
+    const nextStartDate = moment(startDate).add(7, "days").toISOString();
     if (direction === "forward") {
       setStartDate(nextStartDate);
     } else if (moment(nextStartDate).isSameOrBefore(todayDate, "day")) {
@@ -96,7 +94,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
       const currentDate = minDateStartOfWeek
         .clone()
         .add(i + daysOffset, "days")
-        .toDate();
+        .toISOString();
       const isActive = !!value && moment(currentDate).isSame(value, "day");
       const isToday = moment(currentDate).isSame(todayDate, "day");
       const isDisabled =
@@ -114,7 +112,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
           handleDateClick={onDateClick}
           language={language}
           handleDisableDateClick={() => setDisabledDayModal(true)}
-        />,
+        />
       );
     }
 
@@ -123,7 +121,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
 
   useLayoutEffect(() => {
     const today = moment().startOf("day");
-    setStartDate(today.toDate());
+    setStartDate(today.toISOString());
   }, []);
 
   return (
@@ -162,7 +160,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
                   onClick={handlePreviousClick}
                   disabled={moment(startDate).isSameOrBefore(
                     effectiveMinDate,
-                    "day",
+                    "day"
                   )}
                   className={styles["scroll-btn"]}
                   data-pr-tooltip={translationKeywords.tooltipPreviousWeek}
@@ -217,13 +215,13 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
             className={classNames(
               styles["calendar-container"],
               styles.simplified,
-              errorClassName,
+              errorClassName
             )}
           >
             <Calendar
-              value={value}
-              minDate={minDate}
-              maxDate={maxDate}
+              value={moment(value).toDate()}
+              minDate={moment(minDate).toDate()}
+              maxDate={moment(maxDate).toDate()}
               locale={language}
               dateFormat="dd.mm.yy"
               dateTemplate={dateTemplate}
@@ -231,7 +229,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
               baseZIndex={30}
               className={styles["scrollable-calendar-input"]}
               showIcon
-              onChange={(e) => onDateClick(moment(e.value).toDate())}
+              onChange={(e) => onDateClick(moment(e.value).toISOString())}
               {...rest}
             />
             {error && touched ? <ValidationImage fieldWithIcon /> : null}

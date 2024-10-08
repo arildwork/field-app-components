@@ -84,6 +84,13 @@
 .select-with-add {
   display: flex;
 
+  [class~="p-dropdown"] {
+    &[class~="p-focus"] {
+      box-shadow: none;
+      outline: none;
+    }
+  }
+
   .select-wrapper {
     width: calc(100% - 40px);
   }

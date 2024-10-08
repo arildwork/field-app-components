@@ -21,10 +21,9 @@ const Dropdown: FC<DropdownProps> = ({
   return (
     <PRDropdown
       appendTo="self"
-      style={{ maxWidth: "100%" }}
-      emptyMessage={optionsLoading ? <div>loading</div> : "noResults"}
-      filterPlaceholder={"Placeholder"}
-      emptyFilterMessage={"noResults"}
+      emptyMessage={optionsLoading ? <div>loading</div> : "No results"}
+      filterPlaceholder="Filter results"
+      emptyFilterMessage="No results"
       valueTemplate={props.valueTemplate}
       loading={valueLoading}
       {...props}
