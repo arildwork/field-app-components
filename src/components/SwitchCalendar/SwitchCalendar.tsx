@@ -36,7 +36,6 @@ export type CalendarTranslationKeywords = {
   tooltipPreviousWeek: string;
   tooltipNextWeek: string;
   calendarPlaceholder: string;
-  errorFillOutField: string;
 };
 
 const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
@@ -112,7 +111,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
           handleDateClick={onDateClick}
           language={language}
           handleDisableDateClick={() => setDisabledDayModal(true)}
-        />
+        />,
       );
     }
 
@@ -160,7 +159,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
                   onClick={handlePreviousClick}
                   disabled={moment(startDate).isSameOrBefore(
                     effectiveMinDate,
-                    "day"
+                    "day",
                   )}
                   className={styles["scroll-btn"]}
                   data-pr-tooltip={translationKeywords.tooltipPreviousWeek}
@@ -215,7 +214,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
             className={classNames(
               styles["calendar-container"],
               styles.simplified,
-              errorClassName
+              errorClassName,
             )}
           >
             <Calendar
@@ -236,9 +235,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
           </div>
         )}
       </div>
-      {error && touched ? (
-        <ValidationText text={translationKeywords.errorFillOutField} />
-      ) : null}
+      {error && touched ? <ValidationText text={error} /> : null}
       <FACModule
         visible={disabledDayModal}
         onHide={() => setDisabledDayModal(false)}

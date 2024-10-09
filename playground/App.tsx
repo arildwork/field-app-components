@@ -1,11 +1,5 @@
 import moment from "moment";
-import React, {
-  ChangeEvent,
-  FormEvent,
-  ReactNode,
-  useRef,
-  useState,
-} from "react";
+import React, { ChangeEvent, FormEvent, ReactNode, useState } from "react";
 import { PrimeIcons } from "primereact/api";
 import { CalendarDateTemplateEvent } from "primereact/calendar";
 import FACSelect, { OptionsModel } from "@/components/Select/Select";
@@ -33,7 +27,6 @@ const calendarTranslationKeywords: CalendarTranslationKeywords = {
   tooltipPreviousWeek: "prev week",
   tooltipNextWeek: " next week",
   calendarPlaceholder: "placeholder",
-  errorFillOutField: "mandatory field",
 };
 
 const countries: OptionsModel[] = [
@@ -76,7 +69,7 @@ const columns: ColumnModel[] = [
 const App = () => {
   const [newDate, setNewDate] = useState<string>("");
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null
+    null,
   );
   const [numberValue, setNumberValue] = useState<number>();
   const [textValue, setTextValue] = useState<string>("");
@@ -84,10 +77,10 @@ const App = () => {
   const [updatedCountries, setUpdatedCountries] =
     useState<OptionsModel[]>(countries);
   const [fileUploaded, setFileUploaded] = useState<File | null | undefined>(
-    null
+    null,
   );
   const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
-    inputSwitchOptions[0]
+    inputSwitchOptions[0],
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
