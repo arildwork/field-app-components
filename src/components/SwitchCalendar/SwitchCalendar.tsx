@@ -111,7 +111,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
           handleDateClick={onDateClick}
           language={language}
           handleDisableDateClick={() => setDisabledDayModal(true)}
-        />,
+        />
       );
     }
 
@@ -159,7 +159,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
                   onClick={handlePreviousClick}
                   disabled={moment(startDate).isSameOrBefore(
                     effectiveMinDate,
-                    "day",
+                    "day"
                   )}
                   className={styles["scroll-btn"]}
                   data-pr-tooltip={translationKeywords.tooltipPreviousWeek}
@@ -214,7 +214,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
             className={classNames(
               styles["calendar-container"],
               styles.simplified,
-              errorClassName,
+              errorClassName
             )}
           >
             <Calendar
@@ -239,8 +239,8 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
       <FACModule
         visible={disabledDayModal}
         onHide={() => setDisabledDayModal(false)}
-        moduleContent={<p>Please select another date</p>}
-        header={<h4>This date is not available</h4>}
+        moduleContent="Please select another date"
+        header="This date is not available"
       />
     </div>
   );
