@@ -67,20 +67,19 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
     direction === "forward" ? todayDate.toISOString() : minDate;
 
   const handlePreviousClick = () => {
-    const previousStartDate = moment(startDate)
-      .subtract(7, "days")
-      .toISOString();
+    const previousStartDate = moment(startDate).subtract(7, "days");
+
     if (moment(previousStartDate).isSameOrAfter(effectiveMinDate, "day")) {
-      setStartDate(previousStartDate);
+      setStartDate(previousStartDate.toISOString());
     }
   };
 
   const handleNextClick = () => {
-    const nextStartDate = moment(startDate).add(7, "days").toISOString();
+    const nextStartDate = moment(startDate).add(7, "days");
     if (direction === "forward") {
-      setStartDate(nextStartDate);
+      setStartDate(nextStartDate.toISOString());
     } else if (moment(nextStartDate).isSameOrBefore(todayDate, "day")) {
-      setStartDate(nextStartDate);
+      setStartDate(nextStartDate.toISOString());
     }
   };
 
@@ -92,8 +91,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
     for (let i = 0; i < 7; i++) {
       const currentDate = minDateStartOfWeek
         .clone()
-        .add(i + daysOffset, "days")
-        .toISOString();
+        .add(i + daysOffset, "days");
       const isActive = !!value && moment(currentDate).isSame(value, "day");
       const isToday = moment(currentDate).isSame(todayDate, "day");
       const isDisabled =
@@ -104,7 +102,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
       weekDays.push(
         <SwitchCalendarDay
           key={i}
-          currentDate={currentDate}
+          currentDate={currentDate.toISOString()}
           isActive={isActive}
           isToday={isToday}
           isDisabled={isDisabled}

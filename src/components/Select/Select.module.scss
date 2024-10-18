@@ -28,6 +28,10 @@
       box-shadow: none;
       outline: 1px solid var(--steel-blue);
     }
+
+    [class~="p-dropdown-panel"] {
+      width: 100%;
+    }
   }
 
   .add-button {
