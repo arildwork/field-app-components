@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import {
   Accordion,
   AccordionProps,
@@ -14,7 +14,7 @@ import {
 import { classNames } from "primereact/utils";
 
 export type FACAccordionProps = {
-  error?: string;
+  error?: string | string[];
   touched?: boolean;
   required?: boolean;
 } & AccordionProps &

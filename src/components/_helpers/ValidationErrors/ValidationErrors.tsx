@@ -4,7 +4,7 @@ import type { FC, JSX } from "react";
 import styles from "./ValidationErrors.module.scss";
 
 type ValidationTextProps = {
-  text: string;
+  text: string | string[];
 };
 
 type ValidationImageProps = {
@@ -17,7 +17,17 @@ export const ValidationText: FC<ValidationTextProps> = ({
   text,
 }): JSX.Element => (
   <div className={styles["validation-text"]}>
-    <p>{text}</p>
+    {Array.isArray(text) ? (
+      text.length > 0 && (
+        <>
+          {text.map((t, index) => (
+            <p key={index}>{t}</p>
+          ))}
+        </>
+      )
+    ) : (
+      <p>{text}</p>
+    )}
   </div>
 );
 
