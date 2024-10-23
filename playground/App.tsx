@@ -114,7 +114,7 @@ const App = () => {
         dateTemplate={dateTemplate}
         // error={"test"}
         // touched={true}
-        language="en"
+        language="de"
         translationKeywords={calendarTranslationKeywords}
         direction="backward"
       />

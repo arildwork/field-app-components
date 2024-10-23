@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from "@/config/MomentConfig";
 import { classNames } from "primereact/utils";
 import type { FC, JSX } from "react";
 import styles from "./SwitchCalendar.module.scss";
@@ -32,7 +32,7 @@ const SwitchCalendarDay: FC<ScrollableCalendarDayProps> = ({
           className={classNames(
             styles.date,
             isActive && styles.active,
-            isToday && styles.today
+            isToday && styles.today,
           )}
           onClick={() => handleDateClick(currentDate)}
         >

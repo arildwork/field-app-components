@@ -1,6 +1,6 @@
 import type { FC, JSX, ReactNode } from "react";
 import { useLayoutEffect, useState } from "react";
-import moment from "moment";
+import moment from "@/config/MomentConfig";
 import { CalendarDateTemplateEvent } from "primereact/calendar";
 import { PrimeIcons } from "primereact/api";
 import { classNames } from "primereact/utils";
@@ -109,7 +109,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
           handleDateClick={onDateClick}
           language={language}
           handleDisableDateClick={() => setDisabledDayModal(true)}
-        />
+        />,
       );
     }
 
@@ -157,7 +157,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
                   onClick={handlePreviousClick}
                   disabled={moment(startDate).isSameOrBefore(
                     effectiveMinDate,
-                    "day"
+                    "day",
                   )}
                   className={styles["scroll-btn"]}
                   data-pr-tooltip={translationKeywords.tooltipPreviousWeek}
@@ -212,11 +212,11 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
             className={classNames(
               styles["calendar-container"],
               styles.simplified,
-              errorClassName
+              errorClassName,
             )}
           >
             <Calendar
-              value={moment(value).toDate()}
+              value={value ? moment(value).toDate() : null}
               minDate={moment(minDate).toDate()}
               maxDate={moment(maxDate).toDate()}
               locale={language}

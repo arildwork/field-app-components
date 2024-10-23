@@ -1,0 +1,215 @@
+import moment from "moment";
+import "moment/locale/de";
+import "moment/locale/ro";
+import { locale, addLocale } from "primereact/api";
+
+moment.updateLocale("en", {
+  week: {
+    dow: 1,
+  },
+
+  longDateFormat: {
+    L: "MM/DD/YYYY",
+    LL: "MMMM Do YYYY",
+    LLL: "MMMM Do YYYY LT",
+    LLLL: "dddd, MMMM Do YYYY LT",
+    LT: "HH:mm",
+    LTS: "h:mm:ss A",
+  },
+});
+
+moment.updateLocale("de", {
+  longDateFormat: {
+    L: "MM/DD/YYYY",
+    LL: "MMMM Do YYYY",
+    LLL: "MMMM Do YYYY LT",
+    LLLL: "dddd, MMMM Do YYYY LT",
+    LT: "HH:mm",
+    LTS: "h:mm:ss A",
+  },
+  months: [
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember",
+  ],
+  monthsShort: [
+    "Jan",
+    "Feb",
+    "Mär",
+    "Apr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Okt",
+    "Nov",
+    "Dez",
+  ],
+  week: {
+    dow: 1,
+  },
+  weekdaysShort: ["So.", "Mo.", "Di.", "Mi.", "Do.", "Fr.", "Sa."],
+});
+
+moment.updateLocale("ro", {
+  longDateFormat: {
+    L: "MM/DD/YYYY",
+    LL: "MMMM Do YYYY",
+    LLL: "MMMM Do YYYY LT",
+    LLLL: "dddd, MMMM Do YYYY LT",
+    LT: "HH:mm",
+    LTS: "h:mm:ss A",
+  },
+  months: [
+    "Ianuarie",
+    "Februarie",
+    "Martie",
+    "Aprilie",
+    "Mai",
+    "Iunie",
+    "Iulie",
+    "August",
+    "Septembrie",
+    "Octombrie",
+    "Noiembrie",
+    "Decembrie",
+  ],
+  monthsShort: [
+    "Ian",
+    "Feb",
+    "Mar",
+    "Apr",
+    "Mai",
+    "Iun",
+    "Iul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Noi",
+    "Dec",
+  ],
+  week: {
+    dow: 1,
+  },
+  weekdaysShort: ["Dum", "Lun", "Mar", "Mie", "Joi", "Vin", "Sam"],
+});
+
+const germanLocale = {
+  firstDayOfWeek: 1,
+  dayNames: [
+    "Sonntag",
+    "Montag",
+    "Dienstag",
+    "Mittwoch",
+    "Donnerstag",
+    "Freitag",
+    "Samstag",
+  ],
+  dayNamesShort: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
+  dayNamesMin: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
+  monthNames: [
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember",
+  ],
+  monthNamesShort: [
+    "Jan",
+    "Feb",
+    "Mär",
+    "Apr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Okt",
+    "Nov",
+    "Dez",
+  ],
+  today: "Heute",
+  clear: "Löschen",
+  chooseDate: "Datum wählen",
+  weekHeader: "KW",
+  dateFormat: "dd.mm.yy",
+  weak: "Schwach",
+  medium: "Mittel",
+  strong: "Stark",
+  passwordPrompt: "Passwort eingeben",
+};
+
+const romanianLocale = {
+  firstDayOfWeek: 1,
+  dayNames: [
+    "Duminică",
+    "Luni",
+    "Marți",
+    "Miercuri",
+    "Joi",
+    "Vineri",
+    "Sâmbătă",
+  ],
+  dayNamesShort: ["Du", "Lu", "Ma", "Mi", "Jo", "Vi", "Sâ"],
+  dayNamesMin: ["Du", "Lu", "Ma", "Mi", "Jo", "Vi", "Sâ"],
+  monthNames: [
+    "Ianuarie",
+    "Februarie",
+    "Martie",
+    "Aprilie",
+    "Mai",
+    "Iunie",
+    "Iulie",
+    "August",
+    "Septembrie",
+    "Octombrie",
+    "Noiembrie",
+    "Decembrie",
+  ],
+  monthNamesShort: [
+    "Ian",
+    "Feb",
+    "Mar",
+    "Apr",
+    "Mai",
+    "Iun",
+    "Iul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Noi",
+    "Dec",
+  ],
+  today: "Astăzi",
+  clear: "Șterge",
+  chooseDate: "Alegeți data",
+  weekHeader: "Săpt",
+  dateFormat: "dd.mm.yy",
+  weak: "Slab",
+  medium: "Mediu",
+  strong: "Puternic",
+  passwordPrompt: "Introduceți parola",
+};
+
+addLocale("de", germanLocale);
+addLocale("ro", romanianLocale);
+locale("de");
+
+export default moment;
