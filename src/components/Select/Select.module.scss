@@ -5,6 +5,9 @@
     color: var(--aluminum-blue);
     display: block;
     margin-bottom: 6px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 

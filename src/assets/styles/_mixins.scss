@@ -1,0 +1,43 @@
+// Animations
+@mixin transition($prop: all, $time: 0.3s) {
+  transition: $prop $time ease;
+}
+
+// Responsive
+$mob: 768px;
+$not-mob: 769px;
+$tablet: 991px;
+$not-tablet: 992px;
+$laptop: 1200px;
+$not-laptop: 1201px;
+$desktop: 1500px;
+
+@mixin mobile {
+  @media (max-width: #{$mob}) {
+    @content;
+  }
+}
+
+@mixin tabletAndMobile {
+  @media (max-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$tablet}) and (min-width: #{$not-mob}) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (max-width: #{$laptop}) and (min-width: #{$not-tablet}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: #{$desktop}) and (min-width: #{$not-laptop}) {
+    @content;
+  }
+}

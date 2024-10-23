@@ -19,6 +19,8 @@ export type FCASelectProps = {
   selectLabel?: string;
   error?: string;
   touched?: boolean;
+  extraClassname?: string;
+  iconExtraClassname?: string;
 } & DropdownProps;
 
 export type OptionsModel = {
@@ -37,6 +39,8 @@ const FACSelect: FC<FCASelectProps> = ({
   required,
   error,
   touched,
+  extraClassname,
+  iconExtraClassname,
   ...rest
 }) => {
   const uniqueID = v4();
@@ -56,7 +60,7 @@ const FACSelect: FC<FCASelectProps> = ({
   );
 
   return (
-    <div className={styles["select-wrapper"]}>
+    <div className={classNames(styles["select-wrapper"], extraClassname)}>
       {selectLabel && (
         <label htmlFor={uniqueID}>
           {required ? `${selectLabel} *` : selectLabel}
@@ -72,7 +76,11 @@ const FACSelect: FC<FCASelectProps> = ({
             {error && touched ? (
               <ValidationImage fieldWithLeftIcon />
             ) : (
-              icon && <div className={styles.icon}>{icon}</div>
+              icon && (
+                <div className={classNames(styles.icon, iconExtraClassname)}>
+                  {icon}
+                </div>
+              )
             )}
             <DropdownComponent />
           </div>
