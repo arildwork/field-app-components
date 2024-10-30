@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/arildwork/field-app-components"
   },
-  "version": "0.0.40",
+  "version": "0.0.41",
   "main": "dist/field-app-components.umd.js",
   "module": "dist/field-app-components.es.js",
   "types": "dist/index.d.ts",

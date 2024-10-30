@@ -150,7 +150,7 @@
       }
 
       &[class~="p-highlight"] {
-        background: var(--aluminum-blue);
+        background: var(--aluminum-blue) !important;
         color: var(--white);
       }
 
