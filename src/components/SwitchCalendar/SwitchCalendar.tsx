@@ -85,13 +85,15 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
 
   const renderWeekDays = () => {
     const weekDays: JSX.Element[] = [];
-    const minDateStartOfWeek = moment(startDate).startOf("week");
-    const daysOffset = moment(startDate).diff(minDateStartOfWeek, "days");
+    const startOfRange = moment(startDate);
+    const endOfRange = startOfRange.clone().add(6, "days");
 
     for (let i = 0; i < 7; i++) {
-      const currentDate = minDateStartOfWeek
-        .clone()
-        .add(i + daysOffset, "days");
+      const currentDate =
+        direction === "backward"
+          ? endOfRange.clone().subtract(i, "days")
+          : startOfRange.clone().add(i, "days");
+
       const isActive = !!value && moment(currentDate).isSame(value, "day");
       const isToday = moment(currentDate).isSame(todayDate, "day");
       const isDisabled =
@@ -109,17 +111,21 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
           handleDateClick={onDateClick}
           language={language}
           handleDisableDateClick={() => setDisabledDayModal(true)}
-        />,
+        />
       );
     }
 
-    return weekDays;
+    return direction === "backward" ? weekDays.reverse() : weekDays;
   };
 
   useLayoutEffect(() => {
     const today = moment().startOf("day");
-    setStartDate(today.toISOString());
-  }, []);
+    if (direction === "backward") {
+      setStartDate(today.subtract(6, "days").toISOString());
+    } else {
+      setStartDate(today.toISOString());
+    }
+  }, [direction]);
 
   return (
     <div className={styles["scrollable-calendar"]}>
@@ -157,7 +163,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
                   onClick={handlePreviousClick}
                   disabled={moment(startDate).isSameOrBefore(
                     effectiveMinDate,
-                    "day",
+                    "day"
                   )}
                   className={styles["scroll-btn"]}
                   data-pr-tooltip={translationKeywords.tooltipPreviousWeek}
@@ -175,7 +181,9 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
                   onClick={handleNextClick}
                   disabled={
                     direction === "backward"
-                      ? moment(startDate).isSameOrAfter(todayDate, "day")
+                      ? moment(startDate)
+                          .add(7, "days")
+                          .isAfter(todayDate, "day")
                       : false
                   }
                   className={styles["scroll-btn"]}
@@ -212,7 +220,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
             className={classNames(
               styles["calendar-container"],
               styles.simplified,
-              errorClassName,
+              errorClassName
             )}
           >
             <Calendar
