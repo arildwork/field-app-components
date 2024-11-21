@@ -41,9 +41,10 @@
       border-radius: var(--border-8);
       transition: all 0.3s ease;
 
-      &:focus {
+      &[class~="p-inputwrapper-focus"] {
         outline: none;
         box-shadow: none;
+        border-color: var(--steel-blue);
       }
       &:focus,
       &:hover {
@@ -152,6 +153,19 @@
       &[class~="p-highlight"] {
         background: var(--aluminum-blue) !important;
         color: var(--white);
+      }
+
+      &[class~="p-focus"] {
+        &:before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          border: 1px solid var(--steel-blue);
+          border-radius: var(--border-50);
+        }
       }
 
       &:not([class~="p-highlight"]) {

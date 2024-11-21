@@ -69,7 +69,7 @@ const columns: ColumnModel[] = [
 const App = () => {
   const [newDate, setNewDate] = useState<string>("");
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null
+    null,
   );
   const [numberValue, setNumberValue] = useState<number>();
   const [textValue, setTextValue] = useState<string>("");
@@ -77,10 +77,10 @@ const App = () => {
   const [updatedCountries, setUpdatedCountries] =
     useState<OptionsModel[]>(countries);
   const [fileUploaded, setFileUploaded] = useState<File | null | undefined>(
-    null
+    null,
   );
   const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
-    inputSwitchOptions[0]
+    inputSwitchOptions[0],
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
@@ -95,7 +95,7 @@ const App = () => {
   };
 
   const minimumDate = moment().subtract(360, "days");
-  const maximumDate = moment().add(360, "days");
+  // const maximumDate = moment().add(360, "days");
   const currentDate = moment();
 
   return (
@@ -113,8 +113,6 @@ const App = () => {
         // maxDate={maximumDate.toISOString()}
         onDateClick={(date) => setNewDate(date)}
         dateTemplate={dateTemplate}
-        // error={"test"}
-        // touched={true}
         language="en"
         translationKeywords={calendarTranslationKeywords}
         direction="backward"
@@ -127,9 +125,6 @@ const App = () => {
         setValue={(e) => setSelectedCountry(e.value)}
         icon={<i className={PrimeIcons.CLOCK}></i>}
         selectLabel="test"
-        required
-        error={"test err asd"}
-        touched={true}
       />
       <div className="mb-2"></div>
       <FACSelect
@@ -139,8 +134,6 @@ const App = () => {
         setValue={(e) => setSelectedCountry(e.value)}
         filter
         selectLabel="test 2"
-        error={"test err asd"}
-        touched={true}
       />
       <div className="mb-2"></div>
       <FACSelect
@@ -167,9 +160,6 @@ const App = () => {
         modalHeader={"Header 1"}
         filter
         selectWithAddLabel="test two"
-        required
-        // error={"test err asd"}
-        // touched={true}
       />
       <div className="mb-2"></div>
       <FACInputNumber
@@ -179,8 +169,6 @@ const App = () => {
         onChange={(e: InputNumberChangeEvent) => setNumberValue(e.value ?? 0)}
         useGrouping={false}
         showButtons
-        error={"dfsd"}
-        touched={true}
       />
       <div className="mb-2"></div>
       <FACInputNumber
@@ -210,12 +198,7 @@ const App = () => {
         inputIcon={<i className={PrimeIcons.PENCIL}></i>}
       />
       <div className="mb-2"></div>
-      <FACInputUpload
-        onFileSelect={setFileUploaded}
-        inputLabel="Upload"
-        error={"ret"}
-        touched={true}
-      />
+      <FACInputUpload onFileSelect={setFileUploaded} inputLabel="Upload" />
       <div className="mb-2"></div>
       <FACInputSwitch
         inputOptions={inputSwitchOptions}

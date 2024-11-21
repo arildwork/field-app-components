@@ -28,7 +28,8 @@ const SwitchCalendarDay: FC<ScrollableCalendarDayProps> = ({
         {moment(currentDate).locale(language).format("ddd")}
       </div>
       {!isDisabled ? (
-        <div
+        <button
+          type="button"
           className={classNames(
             styles.date,
             isActive && styles.active,
@@ -37,7 +38,7 @@ const SwitchCalendarDay: FC<ScrollableCalendarDayProps> = ({
           onClick={() => handleDateClick(currentDate)}
         >
           {moment(currentDate).format("D")}
-        </div>
+        </button>
       ) : (
         <div
           className={classNames(styles.date, styles["date-disabled"])}

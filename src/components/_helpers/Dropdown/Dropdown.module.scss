@@ -13,6 +13,7 @@
 
   &[class~="p-inputwrapper-focus"] {
     box-shadow: none;
+    border-color: var(--steel-blue);
   }
 
   &:hover {

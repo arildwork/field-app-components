@@ -110,8 +110,8 @@
 
     .date {
       font-size: 1.4rem;
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -120,6 +120,9 @@
       transition: all 0.3s ease;
       cursor: pointer;
       color: var(--steel-blue);
+      border: 0;
+      background: none;
+      line-height: 1;
 
       &:hover,
       &.today {
@@ -133,6 +136,11 @@
         cursor: default;
         opacity: 0.5;
         text-decoration: line-through;
+      }
+      &:focus,
+      &:focus-visible {
+        outline: none;
+        border: 1px solid var(--aluminum-blue);
       }
     }
     .name {

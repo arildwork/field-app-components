@@ -19,10 +19,6 @@
   transition: all 0.3s ease;
   position: relative;
 
-  &:hover {
-    border: 1px solid var(--steel-blue);
-  }
-
   [class~="p-dropdown"] {
     height: 42px;
     border: 0;
@@ -64,6 +60,10 @@
 .select {
   display: flex;
 
+  &:hover {
+    border: 1px solid var(--steel-blue);
+  }
+
   [class~="p-dropdown"] {
     border: 0;
     width: 100%;
@@ -90,13 +90,35 @@
 
 .select-with-add {
   display: flex;
+  position: relative;
 
   [class~="p-dropdown"] {
+    position: initial;
+
     &[class~="p-focus"] {
       box-shadow: none;
       outline: none;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        border: 1px solid var(--steel-blue);
+        border-radius: var(--border-8);
+      }
     }
   }
+
+  //&:hover {
+  //  [class~="p-dropdown"] {
+  //    &:before {
+  //      border: 1px solid var(--steel-blue);
+  //    }
+  //  }
+  //}
 
   .select-wrapper {
     width: calc(100% - 40px);
