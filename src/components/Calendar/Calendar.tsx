@@ -45,9 +45,9 @@ const FACCalendar: FC<FACCalendarProps> = ({
           onChange={(e) => onDateClick(moment(e.value).toISOString())}
           locale={language}
           dateFormat="dd.mm.yy"
-          showButtonBar
           minDate={minDate}
           maxDate={maxDate}
+          showButtonBar
           {...rest}
         />
         <div className={styles["calendar-icon"]}>
