@@ -12,7 +12,7 @@ import {
   ValidationText,
 } from "@/components/_helpers/ValidationErrors/ValidationErrors";
 import Tooltip from "@/components/_helpers/Tooltip/Tooltip";
-import { Calendar } from "@/components/_helpers/Calendar/Calendar";
+import HelperCalendar from "@/components/_helpers/Calendar/Calendar";
 import FACModule from "@/components/Module/Module";
 
 export type FCASwitchCalendarProps = {
@@ -111,7 +111,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
           handleDateClick={onDateClick}
           language={language}
           handleDisableDateClick={() => setDisabledDayModal(true)}
-        />
+        />,
       );
     }
 
@@ -163,7 +163,7 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
                   onClick={handlePreviousClick}
                   disabled={moment(startDate).isSameOrBefore(
                     effectiveMinDate,
-                    "day"
+                    "day",
                   )}
                   className={styles["scroll-btn"]}
                   data-pr-tooltip={translationKeywords.tooltipPreviousWeek}
@@ -220,10 +220,10 @@ const FACSwitchCalendar: FC<FCASwitchCalendarProps> = ({
             className={classNames(
               styles["calendar-container"],
               styles.simplified,
-              errorClassName
+              errorClassName,
             )}
           >
-            <Calendar
+            <HelperCalendar
               value={value ? moment(value).toDate() : null}
               minDate={moment(minDate).toDate()}
               maxDate={moment(maxDate).toDate()}

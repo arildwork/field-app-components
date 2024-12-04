@@ -4,7 +4,7 @@ import { classNames } from "primereact/utils";
 import type { FC, JSX } from "react";
 import styles from "./Calendar.module.scss";
 
-export const Calendar: FC<CalendarProps> = ({
+const HelperCalendar: FC<CalendarProps> = ({
   className,
   pt,
   ...props
@@ -22,3 +22,5 @@ export const Calendar: FC<CalendarProps> = ({
     }}
   />
 );
+
+export default HelperCalendar;

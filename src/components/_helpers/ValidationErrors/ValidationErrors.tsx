@@ -8,6 +8,7 @@ type ValidationTextProps = {
 };
 
 type ValidationImageProps = {
+  extraClass?: string;
   fieldWithIcon?: boolean;
   fieldWithLeftIcon?: boolean;
   fieldWithDoubleIcon?: boolean;
@@ -32,12 +33,13 @@ export const ValidationText: FC<ValidationTextProps> = ({
 );
 
 export const ValidationImage: FC<ValidationImageProps> = ({
+  extraClass,
   fieldWithIcon,
   fieldWithLeftIcon,
   fieldWithDoubleIcon,
 }): JSX.Element => (
   <div
-    className={classNames(styles["validation-image"], {
+    className={classNames(styles["validation-image"], extraClass, {
       [styles["validation-image-icon"]]: fieldWithIcon,
       [styles["validation-image-left-icon"]]: fieldWithLeftIcon,
       [styles["validation-image-double-icon"]]: fieldWithDoubleIcon,

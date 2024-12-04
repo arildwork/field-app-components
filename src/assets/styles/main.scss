@@ -1,2 +1,13 @@
 @import "variables";
 @import "mixins";
+
+// General styles
+.p-component {
+  font-size: 14px;
+}
+
+.p-datepicker {
+  table {
+    font-size: 12px;
+  }
+}

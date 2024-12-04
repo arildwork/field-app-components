@@ -2,7 +2,7 @@
   position: relative;
 
   [class~="p-accordion"] {
-    box-shadow: var(--shadow-accordion);
+    box-shadow: var(--shadow-accordion-2);
     border-radius: var(--border-8);
     background: var(--white);
     border: 1px solid transparent;
@@ -13,7 +13,7 @@
         background: none;
         font: 700 14px var(--main-font);
         color: var(--steel-blue);
-        padding: 12px 15px;
+        padding: 8px;
 
         [class~="p-accordion-toggle-icon"] {
           order: 2;
@@ -30,7 +30,7 @@
       }
 
       [class~="p-accordion-content"] {
-        padding: 0 15px 15px;
+        padding: 8px;
         background: none;
         border: none;
         font-size: 12px;
@@ -41,6 +41,9 @@
   &-error {
     [class~="p-accordion"] {
       border-color: var(--warning);
+    }
+    .validation-image {
+      top: 12px;
     }
   }
 }

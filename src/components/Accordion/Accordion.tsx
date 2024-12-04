@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC } from "react";
 import {
   Accordion,
   AccordionProps,
@@ -44,7 +44,12 @@ const FACAccordion: FC<FACAccordionProps> = ({
           {children}
         </AccordionTab>
       </Accordion>
-      {error && touched ? <ValidationImage fieldWithIcon /> : null}
+      {error && touched ? (
+        <ValidationImage
+          extraClass={styles["validation-image"]}
+          fieldWithIcon
+        />
+      ) : null}
       {error && touched ? <ValidationText text={error ? error : ""} /> : null}
     </div>
   );

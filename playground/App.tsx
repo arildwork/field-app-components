@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { ChangeEvent, FormEvent, ReactNode, useState } from "react";
+import React, { ChangeEvent, ReactNode, useState } from "react";
 import { PrimeIcons } from "primereact/api";
 import { CalendarDateTemplateEvent } from "primereact/calendar";
 import FACSelect, { OptionsModel } from "@/components/Select/Select";
@@ -20,6 +20,7 @@ import { ColumnModel } from "@/components/Datatable/Datatable";
 import { MaterialDatatableModel } from "@/components/Datatable/MaterialDatatable";
 import FACDatatable from "@/components/Datatable/Datatable";
 import FACAccordion from "@/components/Accordion/Accordion";
+import FACCalendar from "../src/components/Calendar/Calendar";
 
 const calendarTranslationKeywords: CalendarTranslationKeywords = {
   actionsCalendarView: "calendar view",
@@ -84,16 +85,6 @@ const App = () => {
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
-
-  const testSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(fileUploaded);
-  };
-
-  const testResetHandler = () => {
-    setFileUploaded(null);
-  };
-
   const minimumDate = moment().subtract(360, "days");
   // const maximumDate = moment().add(360, "days");
   const currentDate = moment();
@@ -101,8 +92,6 @@ const App = () => {
   return (
     <div className="container pt-2 pb-2">
       <h1 style={{ margin: "0 0 3rem" }}>Field App Components Playground</h1>
-      {/*<FACButton label="Click Me" onClick={() => alert("Button Clicked!")} />*/}
-      {/*<FACInput label="test input" type="password" />*/}
       <FACSwitchCalendar
         labelText={"Delivery Date"}
         value={newDate}
@@ -116,6 +105,18 @@ const App = () => {
         language="en"
         translationKeywords={calendarTranslationKeywords}
         direction="backward"
+      />
+      <div className="mt-2"></div>
+      <FACCalendar
+        value={newDate}
+        labelText="Calendar"
+        onDateClick={(date) => setNewDate(date)}
+        minDate={minimumDate.toDate()}
+        maxDate={currentDate.toDate()}
+        language="en"
+        required
+        // error={"test"}
+        // touched={true}
       />
       <div className="mb-2"></div>
       <FACSelect
@@ -244,7 +245,12 @@ const App = () => {
         moduleContent={<div>content</div>}
       />
       <div className="mt-2"></div>
-      <FACAccordion header="Header" required error={"rete"} touched={true}>
+      <FACAccordion
+        header="Header"
+        required
+        error="Error Validation"
+        touched={true}
+      >
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -267,22 +273,6 @@ const App = () => {
           culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </FACAccordion>
-      <div className="mt-2"></div>
-
-      <form onSubmit={testSubmitHandler}>
-        <FACInputUpload
-          name="upload"
-          onFileSelect={setFileUploaded}
-          inputLabel="Upload"
-        />
-
-        <FACInputText />
-        <div></div>
-        <button type="submit">submit</button>
-        <button type="button" onClick={testResetHandler}>
-          reset
-        </button>
-      </form>
     </div>
   );
 };

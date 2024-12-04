@@ -1,13 +1,17 @@
 .scrollable-calendar {
   display: flex;
   flex-wrap: wrap;
+
+  [class="p-component"] {
+    font-size: 14px;
+  }
 }
 
 .calendar-container {
   flex: 0 0 100%;
   background: var(--white);
   border: 1px solid var(--neutral-light);
-  border-radius: 8px;
+  border-radius: var(--border-8);
   padding: 1.5rem;
   position: relative;
 

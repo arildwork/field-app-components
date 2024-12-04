@@ -1,0 +1,62 @@
+.calendar {
+  &-wrapper {
+    position: relative;
+  }
+
+  label {
+    font-size: 12px;
+    color: var(--aluminum-blue);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  &-input {
+    width: 100%;
+
+    [class~="p-inputtext"] {
+      font-size: 14px;
+      height: 42px;
+      padding: 0 14px;
+      background: var(--white);
+      color: var(--steel-blue);
+      border: 1px solid var(--neutral-light);
+      border-radius: var(--border-8);
+
+      &:hover {
+        border-color: var(--steel-blue);
+      }
+    }
+
+    &[class~="p-focus"] {
+      [class~="p-inputtext"] {
+        border: 1px solid var(--steel-blue);
+        outline: none;
+        box-shadow: none;
+      }
+    }
+  }
+
+  &-icon {
+    position: absolute;
+    color: var(--neutral-light);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    width: 35px;
+    pointer-events: none;
+
+    i {
+      font-size: 14px;
+    }
+  }
+
+  .error-calendar {
+    .calendar-input {
+      [class~="p-inputtext"] {
+        border-color: var(--warning);
+      }
+    }
+  }
+}
