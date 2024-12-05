@@ -15,6 +15,7 @@ export { default as FACSelectWithAdd } from "./components/Select/SelectWithAdd";
 // Calendar
 export { default as FACSwitchCalendar } from "./components/SwitchCalendar/SwitchCalendar";
 export { default as FACCalendar } from "./components/Calendar/Calendar";
+export { default as FACTime } from "./components/Time/Time";
 
 // Datatables
 export { default as FACDatatable } from "./components/Datatable/Datatable";

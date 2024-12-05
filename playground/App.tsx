@@ -20,7 +20,8 @@ import { ColumnModel } from "@/components/Datatable/Datatable";
 import { MaterialDatatableModel } from "@/components/Datatable/MaterialDatatable";
 import FACDatatable from "@/components/Datatable/Datatable";
 import FACAccordion from "@/components/Accordion/Accordion";
-import FACCalendar from "../src/components/Calendar/Calendar";
+import FACTime from "@/components/Time/Time";
+import FACCalendar from "@/components/Calendar/Calendar";
 
 const calendarTranslationKeywords: CalendarTranslationKeywords = {
   actionsCalendarView: "calendar view",
@@ -69,8 +70,9 @@ const columns: ColumnModel[] = [
 
 const App = () => {
   const [newDate, setNewDate] = useState<string>("");
+  const [newDateTwo, setNewDateTwo] = useState<string>("");
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null,
+    null
   );
   const [numberValue, setNumberValue] = useState<number>();
   const [textValue, setTextValue] = useState<string>("");
@@ -78,16 +80,18 @@ const App = () => {
   const [updatedCountries, setUpdatedCountries] =
     useState<OptionsModel[]>(countries);
   const [fileUploaded, setFileUploaded] = useState<File | null | undefined>(
-    null,
+    null
   );
   const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
-    inputSwitchOptions[0],
+    inputSwitchOptions[0]
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
   const minimumDate = moment().subtract(360, "days");
   // const maximumDate = moment().add(360, "days");
   const currentDate = moment();
+
+  console.log(newDateTwo);
 
   return (
     <div className="container pt-2 pb-2">
@@ -115,6 +119,17 @@ const App = () => {
         maxDate={currentDate.toDate()}
         language="en"
         required
+        // error={"test"}
+        // touched={true}
+      />
+      <div className="mt-2"></div>
+      <FACTime
+        key="testOne"
+        value={newDateTwo}
+        labelText="Time"
+        onDateClick={(date) => setNewDateTwo(date)}
+        date={newDate}
+        // required
         // error={"test"}
         // touched={true}
       />
