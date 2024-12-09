@@ -6,6 +6,7 @@ import {
   ValidationText,
 } from "@/components/_helpers/ValidationErrors/ValidationErrors";
 import { classNames } from "primereact/utils";
+import moment from "@/config/MomentConfig";
 
 export type FACTimeProps = {
   value: string;
@@ -31,15 +32,18 @@ const FACTime: FC<FACTimeProps> = ({
     const [hours, minutes] = timeValue.split(":");
 
     if (timeValue) {
-      const now = date ? new Date(date) : new Date();
-      now.setHours(Number(hours), Number(minutes), 0, 0);
+      const now = date ? moment(date) : moment();
+      now.set({
+        hour: Number(hours),
+        minute: Number(minutes),
+        second: 0,
+        millisecond: 0,
+      });
       onDateClick(now.toISOString());
     }
   };
 
-  const formattedTime = value
-    ? new Date(value).toISOString().slice(11, 16)
-    : "";
+  const formattedTime = value ? moment(value).format("HH:mm") : "";
 
   return (
     <div className={styles.time}>
