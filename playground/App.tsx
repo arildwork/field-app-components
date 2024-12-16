@@ -191,6 +191,7 @@ const App = () => {
         value={numberValue}
         onChange={(e: InputNumberChangeEvent) => setNumberValue(e.value ?? 0)}
         inputIcon={<i className={PrimeIcons.PENCIL}></i>}
+        allowClear
       />
       <div className="mb-2"></div>
       <FACInputText
@@ -200,6 +201,9 @@ const App = () => {
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           setTextValue(e.target.value ?? "")
         }
+        allowClear
+        // error={"test"}
+        // touched={true}
       />
       <div className="mb-2"></div>
       <FACInputText

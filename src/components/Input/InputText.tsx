@@ -2,11 +2,12 @@ import {
   ValidationImage,
   ValidationText,
 } from "@/components/_helpers/ValidationErrors/ValidationErrors";
-import React, { FC, ReactNode } from "react";
+import { ChangeEvent, FC, ReactNode, useRef } from "react";
 import { InputText, InputTextProps } from "primereact/inputtext";
 import { v4 } from "uuid";
 import { classNames } from "primereact/utils";
 import styles from "./Input.module.scss";
+import { PrimeIcons } from "primereact/api";
 
 export type FACInputTextProps = {
   inputLabel?: string;
@@ -15,6 +16,7 @@ export type FACInputTextProps = {
   inputClassname?: string;
   error?: string;
   touched?: boolean;
+  allowClear?: boolean;
 } & InputTextProps;
 
 const FACInputText: FC<FACInputTextProps> = ({
@@ -27,9 +29,17 @@ const FACInputText: FC<FACInputTextProps> = ({
   required,
   error,
   touched,
+  allowClear = false,
   ...rest
 }) => {
-  const uniqueID = v4();
+  const uniqueID = useRef(v4());
+  const hasError = error && touched;
+
+  const handleClearInput = () => {
+    if (onChange) {
+      onChange({ target: { value: "" } } as ChangeEvent<HTMLInputElement>);
+    }
+  };
 
   return (
     <div
@@ -38,7 +48,7 @@ const FACInputText: FC<FACInputTextProps> = ({
       })}
     >
       {inputLabel && (
-        <label htmlFor={uniqueID}>
+        <label htmlFor={uniqueID.current}>
           {required ? `${inputLabel} *` : inputLabel}
         </label>
       )}
@@ -49,18 +59,27 @@ const FACInputText: FC<FACInputTextProps> = ({
       >
         <InputText
           className={classNames(inputClassname)}
-          id={uniqueID}
+          id={uniqueID.current}
           placeholder={inputPlaceholder}
           value={value}
           onChange={onChange}
           {...rest}
         />
-        {error && touched ? (
+        {allowClear && value && (
+          <button
+            type="button"
+            className={styles["clear-button"]}
+            onClick={handleClearInput}
+          >
+            <i className={PrimeIcons.TIMES}></i>
+          </button>
+        )}
+        {hasError ? (
           <ValidationImage />
         ) : (
           inputIcon && <div className={styles.icon}>{inputIcon}</div>
         )}
-        {error && touched ? <ValidationText text={error ? error : ""} /> : null}
+        {hasError ? <ValidationText text={error ? error : ""} /> : null}
       </div>
     </div>
   );

@@ -2,11 +2,16 @@ import {
   ValidationImage,
   ValidationText,
 } from "@/components/_helpers/ValidationErrors/ValidationErrors";
-import React, { FC, ReactNode } from "react";
+import { ChangeEvent, FC, ReactNode, useRef } from "react";
 import { v4 } from "uuid";
 import { classNames } from "primereact/utils";
 import styles from "./Input.module.scss";
-import { InputNumber, InputNumberProps } from "primereact/inputnumber";
+import {
+  InputNumber,
+  InputNumberChangeEvent,
+  InputNumberProps,
+} from "primereact/inputnumber";
+import { PrimeIcons } from "primereact/api";
 
 export type FACInputNumberProps = {
   inputLabel?: string;
@@ -15,6 +20,7 @@ export type FACInputNumberProps = {
   inputClassname?: string;
   error?: string;
   touched?: boolean;
+  allowClear?: boolean;
 } & InputNumberProps;
 
 const FACInputNumber: FC<FACInputNumberProps> = ({
@@ -27,9 +33,19 @@ const FACInputNumber: FC<FACInputNumberProps> = ({
   required,
   error,
   touched,
+  allowClear = false,
   ...rest
 }) => {
-  const uniqueID = v4();
+  const uniqueID = useRef(v4());
+  const hasError = error && touched;
+
+  const handleClearInput = () => {
+    if (onChange) {
+      onChange({
+        value: null,
+      } as InputNumberChangeEvent);
+    }
+  };
 
   return (
     <div
@@ -38,7 +54,7 @@ const FACInputNumber: FC<FACInputNumberProps> = ({
       })}
     >
       {inputLabel && (
-        <label htmlFor={uniqueID}>
+        <label htmlFor={uniqueID.current}>
           {required ? `${inputLabel} *` : inputLabel}
         </label>
       )}
@@ -49,18 +65,27 @@ const FACInputNumber: FC<FACInputNumberProps> = ({
       >
         <InputNumber
           className={classNames(inputClassname)}
-          id={uniqueID}
+          id={uniqueID.current}
           placeholder={inputPlaceholder}
           value={value}
           onChange={onChange}
           {...rest}
         />
-        {error && touched ? (
+        {allowClear && value !== null && value !== undefined && (
+          <button
+            type="button"
+            className={styles["clear-button"]}
+            onClick={handleClearInput}
+          >
+            <i className={PrimeIcons.TIMES}></i>
+          </button>
+        )}
+        {hasError ? (
           <ValidationImage fieldWithIcon />
         ) : (
           inputIcon && <div className={styles.icon}>{inputIcon}</div>
         )}
-        {error && touched ? <ValidationText text={error ? error : ""} /> : null}
+        {hasError ? <ValidationText text={error ? error : ""} /> : null}
       </div>
     </div>
   );
