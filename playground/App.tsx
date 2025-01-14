@@ -22,6 +22,7 @@ import FACDatatable from "@/components/Datatable/Datatable";
 import FACAccordion from "@/components/Accordion/Accordion";
 import FACTime from "@/components/Time/Time";
 import FACCalendar from "@/components/Calendar/Calendar";
+import { FACButtonIcon } from "../src";
 
 const calendarTranslationKeywords: CalendarTranslationKeywords = {
   actionsCalendarView: "calendar view",
@@ -256,6 +257,17 @@ const App = () => {
         onClick={() => setIsModuleShown(true)}
         buttonLabel="Click to open module"
       />
+      <div className="mb-2"></div>
+      <FACButtonIcon icon={<i className={PrimeIcons.SEARCH_PLUS}></i>} />
+      <FACButtonIcon
+        icon={<i className={PrimeIcons.SEARCH_PLUS}></i>}
+        color="red"
+      />
+      <FACButtonIcon
+        icon={<i className={PrimeIcons.SEARCH_PLUS}></i>}
+        color="blue"
+      />
+      <div className="mb-2"></div>
       <FACModule
         visible={isModuleShown}
         onHide={() => setIsModuleShown(false)}

@@ -7,6 +7,7 @@ export { default as FACInputSwitch } from "./components/Input/InputSwitch";
 // Buttons
 export { default as FACButtonLight } from "./components/Button/ButtonLight";
 export { default as FACButtonDark } from "./components/Button/ButtonDark";
+export { default as FACButtonIcon } from "./components/Button/ButtonIcon";
 
 // Selects
 export { default as FACSelect } from "./components/Select/Select";
