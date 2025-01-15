@@ -43,4 +43,32 @@
       border-color: var(--aluminum-blue);
     }
   }
+
+  &-icon {
+    min-width: auto;
+    width: 36px;
+    padding: 0;
+
+    i {
+      margin: 0;
+    }
+
+    &-red {
+      border-color: var(--red);
+      color: var(--red);
+
+      &:hover {
+        border-color: var(--steel-blue);
+      }
+    }
+
+    &-blue {
+      border-color: var(--aluminum-blue);
+      color: var(--aluminum-blue);
+
+      &:hover {
+        border-color: var(--steel-blue);
+      }
+    }
+  }
 }
