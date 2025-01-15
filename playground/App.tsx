@@ -72,7 +72,7 @@ const App = () => {
   const [newDate, setNewDate] = useState<string>("");
   const [newDateTwo, setNewDateTwo] = useState<string>("");
   const [selectedCountry, setSelectedCountry] = useState<OptionsModel | null>(
-    null,
+    null
   );
   const [numberValue, setNumberValue] = useState<number>();
   const [textValue, setTextValue] = useState<string>("");
@@ -80,10 +80,10 @@ const App = () => {
   const [updatedCountries, setUpdatedCountries] =
     useState<OptionsModel[]>(countries);
   const [fileUploaded, setFileUploaded] = useState<File | null | undefined>(
-    null,
+    null
   );
   const [inputSwitch, setInputSwitch] = useState<OptionsModel>(
-    inputSwitchOptions[0],
+    inputSwitchOptions[0]
   );
 
   const dateTemplate = (date: CalendarDateTemplateEvent): ReactNode => date.day;
@@ -190,8 +190,11 @@ const App = () => {
         inputPlaceholder="Test placeholder"
         value={numberValue}
         onChange={(e: InputNumberChangeEvent) => setNumberValue(e.value ?? 0)}
-        inputIcon={<i className={PrimeIcons.PENCIL}></i>}
+        // inputIcon={<i className={PrimeIcons.PENCIL}></i>}
         allowClear
+        // error={"test"}
+        // touched={true}
+        showButtons
       />
       <div className="mb-2"></div>
       <FACInputText
@@ -202,6 +205,7 @@ const App = () => {
           setTextValue(e.target.value ?? "")
         }
         allowClear
+        // inputIcon={<i className={PrimeIcons.PENCIL}></i>}
         // error={"test"}
         // touched={true}
       />
@@ -214,6 +218,7 @@ const App = () => {
           setTextValue(e.target.value ?? "")
         }
         inputIcon={<i className={PrimeIcons.PENCIL}></i>}
+        allowClear
       />
       <div className="mb-2"></div>
       <FACInputUpload onFileSelect={setFileUploaded} inputLabel="Upload" />

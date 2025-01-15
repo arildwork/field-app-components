@@ -65,19 +65,23 @@ const FACInputText: FC<FACInputTextProps> = ({
           onChange={onChange}
           {...rest}
         />
-        {allowClear && value && (
-          <button
-            type="button"
-            className={styles["clear-button"]}
-            onClick={handleClearInput}
-          >
-            <i className={PrimeIcons.TIMES}></i>
-          </button>
-        )}
         {hasError ? (
           <ValidationImage />
         ) : (
-          inputIcon && <div className={styles.icon}>{inputIcon}</div>
+          <>
+            {allowClear && value && (
+              <button
+                type="button"
+                className={classNames(styles["clear-button"], {
+                  [styles["clear-button-icon"]]: inputIcon,
+                })}
+                onClick={handleClearInput}
+              >
+                <i className={PrimeIcons.TIMES}></i>
+              </button>
+            )}
+            {inputIcon && <div className={styles.icon}>{inputIcon}</div>}
+          </>
         )}
         {hasError ? <ValidationText text={error ? error : ""} /> : null}
       </div>

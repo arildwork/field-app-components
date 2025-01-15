@@ -34,6 +34,7 @@ const FACInputNumber: FC<FACInputNumberProps> = ({
   error,
   touched,
   allowClear = false,
+  showButtons,
   ...rest
 }) => {
   const uniqueID = useRef(v4());
@@ -69,21 +70,26 @@ const FACInputNumber: FC<FACInputNumberProps> = ({
           placeholder={inputPlaceholder}
           value={value}
           onChange={onChange}
+          showButtons={showButtons}
           {...rest}
         />
-        {allowClear && value !== null && value !== undefined && (
-          <button
-            type="button"
-            className={styles["clear-button"]}
-            onClick={handleClearInput}
-          >
-            <i className={PrimeIcons.TIMES}></i>
-          </button>
-        )}
         {hasError ? (
-          <ValidationImage fieldWithIcon />
+          <ValidationImage fieldWithIcon={showButtons} />
         ) : (
-          inputIcon && <div className={styles.icon}>{inputIcon}</div>
+          <>
+            {allowClear && value !== null && value !== undefined && (
+              <button
+                type="button"
+                className={classNames(styles["clear-button"], {
+                  [styles["clear-button-icon"]]: inputIcon || showButtons,
+                })}
+                onClick={handleClearInput}
+              >
+                <i className={PrimeIcons.TIMES}></i>
+              </button>
+            )}
+            {inputIcon && <div className={styles.icon}>{inputIcon}</div>}
+          </>
         )}
         {hasError ? <ValidationText text={error ? error : ""} /> : null}
       </div>

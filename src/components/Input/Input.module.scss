@@ -189,7 +189,7 @@
 
 .clear-button {
   position: absolute;
-  right: 45px;
+  right: 10px;
   appearance: none;
   background: none;
   border: 0;
@@ -198,5 +198,9 @@
   justify-content: center;
   top: 12px;
   padding: 5px;
-  color: var(--neutral-light);
+  color: var(--neutral);
+
+  &-icon {
+    right: 45px;
+  }
 }
